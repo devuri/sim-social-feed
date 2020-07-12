@@ -1,0 +1,24 @@
+{
+    "name": "espresso-dev/instagram-basic-display-php",
+    "description": "A simple PHP class for accessing the Instagram Basic Display API",
+    "keywords": ["instagram", "api"],
+    "homepage": "https://github.com/espresso-dev/instagram-basic-display-php",
+    "type": "library",
+    "require": {
+        "php": ">=7",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "EspressoDev\\InstagramBasicDisplay\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Herman Schutte",
+            "email": "herman@espresso.dev"
+        }
+    ],
+    "minimum-stability": "dev"
+}
