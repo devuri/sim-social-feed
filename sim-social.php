@@ -86,7 +86,6 @@
        * get media
        */
       return $get_user_media;
-
     }
 
     /**
