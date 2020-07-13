@@ -42,7 +42,8 @@ if ( isset( $_POST['submit_activate_id'] ) ) :
   }
 
     // update user info
-    update_option('wpsf_user', igs_user_data());
+    $igsf_profile =  SimIG\Instagram_Social\SimSocialFeed::user_profile();
+    update_option('wpsf_user', $igsf_profile);
 endif;
 
 

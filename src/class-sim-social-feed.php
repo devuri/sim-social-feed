@@ -22,6 +22,43 @@ namespace SimIG\Instagram_Social;
 		}
 
 		/**
+		 * user_profile()
+		 *
+		 * convert user data object to array
+		 * @return array
+		 */
+		public static function user_profile(){
+			$user = simsocial()->getUserProfile();
+			$user_data = (array) $user;
+			return $user_data;
+		}
+
+		/**
+		 * user_media()
+		 * @return object
+		 */
+		public static function user_media(){
+			/**
+			 * Get the users profile
+			 */
+			$user = get_option('wpsf_user');
+			$id = $user['id'];
+
+			/**
+			 * $user_media
+			 *
+			 * get user data
+			 * @var [type]
+			 */
+			$user_media = simsocial()->getUserMedia($id,6);
+
+			/**
+			 * get media
+			 */
+			return $user_media;
+		}
+
+		/**
 		 * list images
 		 * @return
 		 */
