@@ -23,15 +23,23 @@ if ( isset( $_POST['submit_settings_update'] ) ) :
       echo $this->form()->user_feedback('<strong>No Updates Have Been Set</strong> !!!', 'warning');
     } elseif ( isset( $_POST['instagram_token'] ) ) {
       // update and provide feedback
-      $sfig_token = $_POST['instagram_token'];
-      update_option('wpsf_token', $sfig_token );
+      $sftoken = $_POST['instagram_token'];
+
+      /**
+       * create access_token the array 
+       */
+      $ig_access_token = array();
+      $ig_access_token['access_token'] = $sftoken;
+      $ig_access_token['token-type'] = '';
+      $ig_access_token['expires_in'] = '';
+
+      update_option('wpsf_access_token', $ig_access_token );
       echo $this->form()->user_feedback('IG Token Has Been Updated !!!');
     }
 endif;
 
 /**
  * activate with user ID
- * @var [type]
  */
 if ( isset( $_POST['submit_activate_id'] ) ) :
   /**

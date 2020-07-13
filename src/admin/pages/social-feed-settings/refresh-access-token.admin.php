@@ -12,16 +12,15 @@ if ( isset( $_POST['ig_token_update'] ) ) :
   }
 
     /**
-     * get new token
-     * @var [type]
+     * Refresh access token for another 60 days before it expires
      */
-    $sfig_token = simsocial()->refreshToken(sifeed_info('token'), true);
+    $new_ig_token = SimIG\Instagram_Social\SimSocialFeed::refresh_token();
 
     /**
      * update the old token
      */
-    update_option('wpsf_token', $sfig_token );
-    echo $this->form()->user_feedback('IG Token Has Been Updated !!!');
+    update_option('wpsf_access_token', $new_ig_token );
+    echo $this->form()->user_feedback('Token Has Been Updated !!!');
 
 endif;
 ?><div id="frmwrap" >
@@ -29,6 +28,8 @@ endif;
     <hr/>
     <div class="description">
       <?php _e('Get new Instagram Token'); ?>
+      <?php _e('Refresh access token for another 60 days before it expires'); ?>
+      <?php _e('Refresh a long-lived Instagram User Access Token that is at least 24 hours old but has not expired. Refreshed tokens are valid for 60 days from the date at which they are refreshed.'); ?>
     </div>
   <p/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php

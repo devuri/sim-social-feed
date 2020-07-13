@@ -22,6 +22,19 @@ namespace SimIG\Instagram_Social;
 		}
 
 		/**
+		 * refresh_token()
+		 * Refresh access token for another 60 days before it expires
+     * Returns OAuth token and expiry data of the token
+     * @link https://developers.facebook.com/docs/instagram-basic-display-api/reference/refresh_access_token
+		 * @return array
+		 */
+		public static function refresh_token(){
+			$token = simsocial()->refreshToken(get_option('wpsf_access_token')['access_token']);
+			$new_token = (array) $token;
+			return $new_token;
+		}
+
+		/**
 		 * user_profile()
 		 *
 		 * convert user data object to array
@@ -64,8 +77,8 @@ namespace SimIG\Instagram_Social;
 		 */
 		public static function images($w = '250',$css=''){
 			echo '<div class="row" style="display: inline-flex; flex-wrap: wrap; '.$css.'">';
-			if(is_array(get_option('wpsf_data'))){
-				foreach (get_option('wpsf_data') as $mkey => $media) {
+			if(is_array(get_option('wpsf_user_media'))){
+				foreach (get_option('wpsf_user_media') as $mkey => $media) {
 					echo '<div class="ig-image" style="margin: 12px;"><a href="'.$media->permalink.'" target="_blank"><img class="img-responsive" width="'.$w.'" src="'.$media->media_url.'" alt="'.$media->caption.'"></a></div>';
 				}
 			}
@@ -77,16 +90,14 @@ namespace SimIG\Instagram_Social;
 		 *
 		 * @return
 		 */
-		public static function igfeed(){ ?>
-			<div class="container-fluid">
-			<div class="row">
-				<?php
-				if(is_array(get_option('wpsf_data'))){
-					foreach (get_option('wpsf_data') as $mkey => $media) {
-						echo '<div class="ig-image col-md-2"><a href="'.$media->permalink.'" target="_blank"><img class="img-responsive" src="'.$media->media_url.'" alt="'.$media->caption.'"></a></div>';
-					}
-				}
-				 ?>
-			</div>
-			</div><?php }
+		public static function igfeed(){
+			?><div class="ig-photo-container">
+				<div class="ig-photo-feed"><?php
+					if(is_array(get_option('wpsf_user_media'))){
+						foreach (get_option('wpsf_user_media') as $mkey => $media) {
+							echo '<img src="'.$media->media_url.'" alt="'.$media->caption.'">';
+						}
+					} ?></div>
+				</div><?php
+		}
 	}

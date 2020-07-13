@@ -29,7 +29,7 @@ final class Social_Feed_Admin extends AdminPage {
     $menu = array();
     $menu[] = 'Social Feed Settings';
     $menu[] = 'Refresh Feed';
-    $menu[] = 'Get New Token';
+    $menu[] = 'Refresh Access Token';
     return $menu;
   }
 
