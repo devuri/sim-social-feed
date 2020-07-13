@@ -1,6 +1,4 @@
 <?php
-
-
 // Save Data
 if ( isset( $_POST['ig_post_update'] ) ) :
 
@@ -14,7 +12,8 @@ if ( isset( $_POST['ig_post_update'] ) ) :
     /**
      * update the old token
      */
-    update_option('wpsf_data', get_igsmedia()->data );
+    $ig_user_media = SimIG\Instagram_Social\SimSocialFeed::user_media();
+    update_option('wpsf_data', $ig_user_media->data );
     echo $this->form()->user_feedback('IG Feed Has Been Updated !!!');
 
 endif;
@@ -33,7 +32,7 @@ endif;
     SimIG\Instagram_Social\SimSocialFeed::images('240');
     echo '<hr/>';
 
-  // generate nonce_field
+  // nonce_field
   $this->form()->nonce();
 
  // submit button
