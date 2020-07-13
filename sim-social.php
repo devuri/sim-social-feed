@@ -12,7 +12,7 @@
  * Plugin Name:       Sim Social Feed
  * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
  * Description:       Easily Display Social Media Photo Feed for Instagram.
- * Version:           1.0.3
+ * Version:           1.2.5
  * Requires at least: 3.4
  * Requires PHP:      5.6
  * Author:            SwitchWebdev.com
