@@ -29,7 +29,7 @@
     }
 
     /**
-     * Load admin page class via composer
+     * Load composer
      */
     require_once 'vendor/autoload.php';
 
@@ -48,44 +48,6 @@
        * get the object
        */
       return $instagram;
-    }
-
-    /**
-     * igs_user_data()
-     *
-     * convert user data object to array
-     * @return array
-     */
-    function igs_user_data(){
-      $user = simsocial()->getUserProfile();
-      $user_data = (array) $user;
-      return $user_data;
-    }
-
-    /**
-     * get_igsmedia()
-     * @return object
-     */
-    function get_igsmedia(){
-
-      /**
-       * Get the users profile
-       */
-      $instagram_user = get_option('wpsf_user');
-      $userID = $instagram_user['id'];
-
-      /**
-       * $user_media
-       *
-       * get user data
-       * @var [type]
-       */
-      $get_user_media = simsocial()->getUserMedia($userID,6);
-
-      /**
-       * get media
-       */
-      return $get_user_media;
     }
 
     /**
