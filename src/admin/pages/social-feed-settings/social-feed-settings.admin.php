@@ -36,7 +36,7 @@ endif;
   $this->form()->nonce();
 
  // submit button
- echo $this->form()->submit_button('Refresh Instagram Post Feed', 'primary large', 'refresh_instagram_feed');
+ echo $this->form()->submit_button('Refresh Instagram Feed', 'primary large', 'refresh_instagram_feed');
  ?></form>
 <br/>
 </div><!--frmwrap-->

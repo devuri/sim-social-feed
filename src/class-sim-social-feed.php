@@ -64,7 +64,7 @@ namespace SimIG\Instagram_Social;
 		 * @return array
 		 */
 		public static function refresh_token(){
-			$newtoken = simsocial()->refreshToken(get_option('wpsf_token'));
+			$newtoken = simsocial()->refreshToken(get_option('wpsf_token')['access_token']);
 			$user_token = (array) $newtoken;
 			return $user_token;
 		}
