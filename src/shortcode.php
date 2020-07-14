@@ -7,6 +7,12 @@
 	 */
 	add_shortcode('ig_socialfeed', 'sfeed_data');
 	function sfeed_data() {
+
+		/**
+		 * load the grid styles
+		 */
+		wp_enqueue_style('sim-social-feed-grid');
+
 		ob_start();
 		SimSocialFeed::igfeed();
 		$output_sfd = ob_get_contents();
