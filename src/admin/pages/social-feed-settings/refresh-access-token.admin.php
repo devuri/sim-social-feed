@@ -13,7 +13,6 @@ if ( isset( $_POST['ig_token_update'] ) ) :
 
     /**
      * get new token
-     * @var [type]
      */
     $newtoken = SimIG\Instagram_Social\SimSocialFeed::refresh_token();
 
