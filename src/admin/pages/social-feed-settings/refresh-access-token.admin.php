@@ -17,10 +17,17 @@ if ( isset( $_POST['ig_token_update'] ) ) :
     $newtoken = SimIG\Instagram_Social\SimSocialFeed::refresh_token();
 
     /**
-     * update the old token
+     * update the token
      */
     update_option('wpsf_access_token', $newtoken );
-    update_option('wpsf_token', get_option('wpsf_access_token')['access_token'] );
+
+    # new token array
+    $igtoken = array();
+    $igtoken['access_token'] = get_option('wpsf_access_token')['access_token'];
+    $igtoken['reset'] = false;
+
+    # set new token value
+    update_option('wpsf_token', $igtoken );
     echo $this->form()->user_feedback('Instagram Token Has Been Updated !!!');
 
 endif;
