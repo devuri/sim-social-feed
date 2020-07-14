@@ -69,7 +69,7 @@ endif;
     <h2><?php _e('Update Settings'); ?></h2>
     <hr/>
     <div class="description"> <?php
-      _e('Enter Instagram Token');
+      _e('Instagram Token');
       ?></div>
   <p/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php
