@@ -1,7 +1,5 @@
 <?php
 
-	use SimIG\Instagram_Social\SimSocialFeed;
-
 	/**
 	 * run the sim social feed update
 	 */
@@ -10,6 +8,6 @@
 		/**
 		 * update user media
 		 */
-		$ig_user_media = SimSocialFeed::user_media();
-		update_option('wpsf_data', $ig_user_media->data );
+		$ig_user_media = SimIG\Instagram_Social\SimSocialFeed::user_media();
+		update_option('wpsf_user_media', $ig_user_media->data );
 	}

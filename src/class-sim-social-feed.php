@@ -58,14 +58,26 @@ namespace SimIG\Instagram_Social;
 		}
 
 		/**
+		 * refresh_token()
+		 *
+		 * convert token object to array
+		 * @return array
+		 */
+		public static function refresh_token(){
+			$newtoken = simsocial()->refreshToken(get_option('wpsf_token'));
+			$user_token = (array) $newtoken;
+			return $user_token;
+		}
+
+		/**
 		 * list images
 		 * @return
 		 */
 		public static function images($w = '250',$css=''){
 			echo '<div class="row" style="display: inline-flex; flex-wrap: wrap; '.$css.'">';
-			if(is_array(get_option('wpsf_data'))){
-				foreach (get_option('wpsf_data') as $mkey => $media) {
-					echo '<div class="ig-image" style="margin: 12px;"><a href="'.$media->permalink.'" target="_blank"><img class="img-responsive" width="'.$w.'" src="'.$media->media_url.'" alt="'.$media->caption.'"></a></div>';
+			if(is_array(get_option('wpsf_user_media'))){
+				foreach (get_option('wpsf_user_media') as $mkey => $media) {
+					echo '<div class="ig-image" style="margin:2px;"><a href="'.$media->permalink.'" target="_blank"><img class="img-responsive" width="'.$w.'" src="'.$media->media_url.'" alt="'.$media->caption.'"></a></div>';
 				}
 			}
 		  echo '</div>';
@@ -79,8 +91,8 @@ namespace SimIG\Instagram_Social;
 		public static function igfeed(){
 			?><div class="ig-photo-container">
 				<div class="ig-photo-feed"><?php
-					if(is_array(get_option('wpsf_data'))){
-						foreach (get_option('wpsf_data') as $mkey => $media) {
+					if(is_array(get_option('wpsf_user_media'))){
+						foreach (get_option('wpsf_user_media') as $mkey => $media) {
 							echo '<img src="'.$media->media_url.'" alt="'.$media->caption.'">';
 						}
 					} ?></div>

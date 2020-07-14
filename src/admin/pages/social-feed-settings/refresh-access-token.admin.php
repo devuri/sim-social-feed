@@ -15,12 +15,13 @@ if ( isset( $_POST['ig_token_update'] ) ) :
      * get new token
      * @var [type]
      */
-    $sfig_token = simsocial()->refreshToken(get_option('wpsf_token'));
+    $newtoken = SimIG\Instagram_Social\SimSocialFeed::refresh_token();
 
     /**
      * update the old token
      */
-    update_option('wpsf_token', $sfig_token );
+    update_option('wpsf_access_token', $newtoken );
+    update_option('wpsf_token', get_option('wpsf_access_token')['access_token'] );
     echo $this->form()->user_feedback('Instagram Token Has Been Updated !!!');
 
 endif;
@@ -43,6 +44,7 @@ endif;
       <a href="https://developers.facebook.com/docs/instagram-basic-display-api/reference/refresh_access_token" target="_blank"><?php _e('User Access Tokens'); ?></a>
     </div>
   <p/>
+  <hr/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php
 
   // generate nonce_field
