@@ -41,8 +41,7 @@ namespace SimIG\Instagram_Social;
 			/**
 			 * Get the users profile
 			 */
-			$user = get_option('wpsf_user');
-			$id = $user['id'];
+			$id = get_option('wpsf_user')['id'];
 
 			/**
 			 * $user_media
