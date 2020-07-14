@@ -15,9 +15,9 @@
     display: block;
     float: left;
     flex: 0 0 auto;
-    padding-left: 6px;
+		padding-right: 2px;
+		padding-left:2px;
     padding-bottom: 4px;
-    padding-right: 6px;
     padding-top: 0px;
 }
 
@@ -56,5 +56,3 @@
     height: 100%;
   }
 }
-
-/* https://codepen.io/lis186/pen/azNOOp */
