@@ -12,7 +12,7 @@
  * Plugin Name:       Sim Social Feed
  * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
  * Description:       Easily Display Social Media Photo Feed for Instagram. The feed will schedule twicedaily updates, you can also update manually with a single click.
- * Version:           1.3.2
+ * Version:           1.4.3
  * Requires at least: 3.4
  * Requires PHP:      5.6
  * Author:            SwitchWebdev.com
@@ -62,7 +62,7 @@
 
     function sim_social_assets() {
       // register styles
-      wp_register_style('sim-social-feed-grid', plugin_dir_url(__FILE__) . 'assets/css/simsocial-photo-gird.css', array(), '1.3', 'all');
+      wp_register_style('sim-social-feed-grid', plugin_dir_url(__FILE__) . 'assets/css/simsocial-photo-gird.css', array(), '1.4.3', 'all');
     }
     add_action( 'init', 'sim_social_assets' );
 
