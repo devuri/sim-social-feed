@@ -13,7 +13,7 @@ final class Social_Feed_Admin extends AdminPage {
   private static function admin_menu(){
     $menu = array();
     $menu[] = '#ba315c'; //
-    $menu[] = 'IG Social Feed';
+    $menu[] = 'Instagram Feed';
     $menu[] = 'Social Feed';
     $menu[] = 'manage_options';
     $menu[] = 'social-feed-settings';
@@ -27,7 +27,7 @@ final class Social_Feed_Admin extends AdminPage {
 
   private static function submenu(){
     $menu = array();
-    $menu[] = 'IG Social Feed';
+    $menu[] = 'Instagram Feed';
     $menu[] = 'Refresh Access Token';
     $menu[] = 'Account Setup';
     return $menu;
