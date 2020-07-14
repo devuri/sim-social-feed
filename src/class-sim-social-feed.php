@@ -41,8 +41,7 @@ namespace SimIG\Instagram_Social;
 			/**
 			 * Get the users profile
 			 */
-			$user = get_option('wpsf_user');
-			$id = $user['id'];
+			$id = get_option('wpsf_user')['id'];
 
 			/**
 			 * $user_media
@@ -77,16 +76,14 @@ namespace SimIG\Instagram_Social;
 		 *
 		 * @return
 		 */
-		public static function igfeed(){ ?>
-			<div class="container-fluid">
-			<div class="row">
-				<?php
-				if(is_array(get_option('wpsf_data'))){
-					foreach (get_option('wpsf_data') as $mkey => $media) {
-						echo '<div class="ig-image col-md-2"><a href="'.$media->permalink.'" target="_blank"><img class="img-responsive" src="'.$media->media_url.'" alt="'.$media->caption.'"></a></div>';
-					}
-				}
-				 ?>
-			</div>
-			</div><?php }
+		public static function igfeed(){
+			?><div class="ig-photo-container">
+				<div class="ig-photo-feed"><?php
+					if(is_array(get_option('wpsf_data'))){
+						foreach (get_option('wpsf_data') as $mkey => $media) {
+							echo '<img src="'.$media->media_url.'" alt="'.$media->caption.'">';
+						}
+					} ?></div>
+			</div><?php
+		}
 	}
