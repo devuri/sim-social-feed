@@ -18,8 +18,8 @@ if ( isset( $_POST['submit_update_token'] ) ) :
 
       # Token
       $igtoken = array();
-      $igtoken['token'] = $_POST['instagram_token'];
-      $igtoken['reset'] = 0;
+      $igtoken['access_token'] = $_POST['instagram_token'];
+      $igtoken['reset'] = false;
 
       # update token
       update_option('wpsf_token', $igtoken );
@@ -57,8 +57,8 @@ if ( isset( $_POST['reset_token'] ) ) :
 
     # Reset Token Values
     $igtoken = array();
-    $igtoken['token'] = '';
-    $igtoken['reset'] = 1;
+    $igtoken['access_token'] = '';
+    $igtoken['reset'] = true;
 
     # Reset the token and user info
     update_option('wpsf_token', $igtoken);

@@ -75,7 +75,7 @@
        * how to get the token
        * @link https://www.youtube.com/watch?v=rWUcb8jXgVA
        */
-      $instagram = new EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay(get_option('wpsf_token'));
+      $instagram = new EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay(get_option('wpsf_token')['access_token']);
 
       /**
        * get the object
