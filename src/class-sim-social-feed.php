@@ -13,12 +13,22 @@ namespace SimIG\Instagram_Social;
 		 * @return boolean
 		 */
 		public static function is_request_ok(){
-			// check if we get back error
-			if ( isset( simsocial()->getUserProfile()->error->code )  ) {
-				return false;
-			} else {
-				return true;
+			try {
+			    simsocial()->getUserProfile();
+			} catch (\Exception $e) {
+			  return false;
 			}
+			return true;
+		}
+		
+		/**
+		 * error_message()
+		 *
+		 * give the user some feedback for request error
+		 * @return string
+		 */
+		public static function error_message(){
+			return 'Error: The Request Failed. <br> Configuration data is missing or incorrect <br> Please check the Account Settings !!!';
 		}
 
 		/**
