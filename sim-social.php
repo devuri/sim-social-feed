@@ -29,28 +29,61 @@
     }
 
     /**
-     * setup activation schedule twicedaily
+     * setup activation schedule
      */
-    register_activation_hook( __FILE__, 'sim_social_twicedaily_schedule' );
+    register_activation_hook( __FILE__, 'sim_social_feed_setup' );
 
     /**
-     * check if the event is already scheduled
-     * if not setup our scheduled event
-     * wp_next_scheduled
-     * @link https://developer.wordpress.org/reference/functions/wp_next_scheduled/
+     * setup some defualts
      */
-    function sim_social_twicedaily_schedule(){
-      if( false === wp_next_scheduled( 'sim_social_feed_twicedaily' ) ){
-        wp_schedule_event( time(), 'twicedaily', 'sim_social_feed_twicedaily' );
+    function sim_social_feed_setup(){
+
+      /**
+       * check if the event is already scheduled
+       * if not setup our scheduled event
+       * wp_next_scheduled
+       * @link https://developer.wordpress.org/reference/functions/wp_next_scheduled/
+       */
+      if( ! wp_next_scheduled( 'sim_social_feed_cron' ) ){
+        wp_schedule_event( time(), 'twicedaily', 'sim_social_feed_cron' );
       }
+
+      /**
+       * defualts
+       */
+      $wpsf_token = array();
+      $wpsf_user_media = array();
+      $wpsf_access_token = array();
+
+      update_option('wpsf_token');
+      update_option('wpsf_user_media');
+      update_option('wpsf_access_token');
     }
 
     /**
      * remove the scheduled event
      */
-    register_deactivation_hook( __FILE__, 'remove_sim_social_twicedaily' );
-    function remove_sim_social_twicedaily(){
-      wp_clear_scheduled_hook( 'sim_social_feed_twicedaily' );
+    register_deactivation_hook( __FILE__, 'sim_social_reset' );
+    function sim_social_reset(){
+
+      /**
+       * remove the scheduled event
+       */
+      wp_clear_scheduled_hook( 'sim_social_feed_cron' );
+
+      /**
+       * defualts
+       */
+      $wpsf_token = array();
+      $wpsf_user_media = array();
+      $wpsf_access_token = array();
+
+      /**
+       * reset all
+       */
+      update_option('wpsf_token');
+      update_option('wpsf_user_media');
+      update_option('wpsf_access_token');
     }
 
 
