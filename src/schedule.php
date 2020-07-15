@@ -3,7 +3,7 @@
 	/**
 	 * run the sim social feed update
 	 */
-	add_action( 'sim_social_feed_twicedaily', 'sim_social_igfeed_update' );
+	add_action( 'sim_social_feed_cron', 'sim_social_igfeed_update' );
 	function sim_social_igfeed_update(){
 		/**
 		 * update user media
