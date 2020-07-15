@@ -63,6 +63,7 @@ if ( isset( $_POST['reset_token'] ) ) :
     # Reset the token and user info
     update_option('wpsf_token', $igtoken);
     update_option('wpsf_user', '');
+    update_option('wpsf_user_media', '');
     echo $this->form()->user_feedback('Token has been Removed !!!');
 endif;
 
