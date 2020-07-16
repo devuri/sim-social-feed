@@ -9,12 +9,19 @@ if ( isset( $_POST['refresh_instagram_feed'] ) ) :
     wp_die($this->form()->user_feedback('Verification Failed !!!' , 'error'));
   }
 
-    /**
-     * update the old token
-     */
-    $ig_user_media = SimIG\Instagram_Social\SimSocialFeed::user_media();
-    update_option('wpsf_user_media', $ig_user_media->data );
-    echo $this->form()->user_feedback('IG Feed Has Been Updated !!!');
+    # SOMETHING WENT WRONG WITH THE REQUEST
+    if ( ! SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
+      echo $this->form()->user_feedback(SimIG\Instagram_Social\SimSocialFeed::error_message(), 'error');
+    endif;
+
+    # UPDATE USER MEDIA
+    if ( SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
+      $ig_user_media = SimIG\Instagram_Social\SimSocialFeed::user_media();
+      update_option('wpsf_user_media', $ig_user_media->data );
+      echo $this->form()->user_feedback('IG Feed Has Been Updated !!!');
+    endif;
+
+
 
 endif;
 ?><div id="frmwrap" >
@@ -35,8 +42,16 @@ endif;
   // nonce_field
   $this->form()->nonce();
 
- // submit button
- echo $this->form()->submit_button('Refresh Instagram Feed', 'primary large', 'refresh_instagram_feed');
+    /**
+     * only show if we have valid user
+     */
+    if ( is_array(get_option('wpsf_user'))) {
+      # submit button
+      echo $this->form()->submit_button('Refresh Instagram Feed', 'primary large', 'refresh_instagram_feed');
+    } else {
+      echo $this->form()->user_feedback('Please go to Account Setup and Activate User ID !!!', 'warning');
+    }
+
  ?></form>
 <br/>
 </div><!--frmwrap-->

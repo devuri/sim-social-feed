@@ -8,6 +8,8 @@
 		/**
 		 * update user media
 		 */
-		$ig_user_media = SimIG\Instagram_Social\SimSocialFeed::user_media();
-		update_option('wpsf_user_media', $ig_user_media->data );
+		if ( SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
+			$ig_user_media = SimIG\Instagram_Social\SimSocialFeed::user_media();
+			update_option('wpsf_user_media', $ig_user_media->data );
+		endif;
 	}

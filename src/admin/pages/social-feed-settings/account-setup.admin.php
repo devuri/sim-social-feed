@@ -33,15 +33,16 @@ endif;
  */
 if ( isset( $_POST['submit_activate_id'] ) ) :
 
-  # lets verify the nonce
-  if ( ! $this->form()->verify_nonce()  ) {
-    wp_die($this->form()->user_feedback('Verification Failed !!!' , 'error'));
-  }
+    # lets verify the nonce
+    if ( ! $this->form()->verify_nonce()  ) {
+      wp_die($this->form()->user_feedback('Verification Failed !!!' , 'error'));
+    }
 
-    # update user info
-    $igsf_profile =  SimIG\Instagram_Social\SimSocialFeed::user_profile();
-    update_option('wpsf_user', $igsf_profile);
-    echo $this->form()->user_feedback('IG User Info Has Been Updated !!!');
+      # update user info
+      $igsf_profile =  SimIG\Instagram_Social\SimSocialFeed::user_profile();
+      update_option('wpsf_user', $igsf_profile);
+      echo $this->form()->user_feedback('IG User Info Has Been Updated !!!');
+
 endif;
 
 
@@ -63,6 +64,7 @@ if ( isset( $_POST['reset_token'] ) ) :
     # Reset the token and user info
     update_option('wpsf_token', $igtoken);
     update_option('wpsf_user', '');
+    update_option('wpsf_user_media', '');
     echo $this->form()->user_feedback('Token has been Removed !!!');
 endif;
 
@@ -94,7 +96,7 @@ endif;
   /**
    * update token if its not set
    */
-  if ( true === get_option('wpsf_token')['reset'] ) {
+  if ( true === get_option('wpsf_token')['reset'] || null === get_option('wpsf_token')['reset'] )  {
     echo $this->form()->submit_button('Save Token', 'primary large', 'submit_update_token');
   }
 
