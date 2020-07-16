@@ -11,24 +11,28 @@ if ( isset( $_POST['ig_token_update'] ) ) :
     wp_die($this->form()->user_feedback('Verification Failed !!!' , 'error'));
   }
 
-    /**
-     * get new token
-     */
-    $newtoken = SimIG\Instagram_Social\SimSocialFeed::refresh_token();
+    # SOMETHING WENT WRONG WITH THE REQUEST
+    if ( ! SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
+      echo $this->form()->user_feedback(SimIG\Instagram_Social\SimSocialFeed::error_message(), 'error');
+    endif;
 
-    /**
-     * update the token
-     */
-    update_option('wpsf_access_token', $newtoken );
+    # REQUEST TOKEN UPDATE
+    if ( SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
+      # get new token
+      $newtoken = SimIG\Instagram_Social\SimSocialFeed::refresh_token();
 
-    # new token array
-    $igtoken = array();
-    $igtoken['access_token'] = get_option('wpsf_access_token')['access_token'];
-    $igtoken['reset'] = false;
+      # update the token
+      update_option('wpsf_access_token', $newtoken );
 
-    # set new token value
-    update_option('wpsf_token', $igtoken );
-    echo $this->form()->user_feedback('Instagram Token Has Been Updated !!!');
+      # new token array
+      $igtoken = array();
+      $igtoken['access_token'] = get_option('wpsf_access_token')['access_token'];
+      $igtoken['reset'] = false;
+
+      # set new token value
+      update_option('wpsf_token', $igtoken );
+      echo $this->form()->user_feedback('Instagram Token Has Been Updated !!!');
+    endif;
 
 endif;
 ?><div id="frmwrap" >
@@ -56,8 +60,16 @@ endif;
   // generate nonce_field
   $this->form()->nonce();
 
- // submit button
- echo $this->form()->submit_button('Get New Token', 'primary large', 'ig_token_update');
+  /**
+   * only show if we have valid user
+   */
+  if ( is_array(get_option('wpsf_user'))) {
+    // submit button
+    echo $this->form()->submit_button('Get New Token', 'primary large', 'ig_token_update');
+  } else {
+    echo $this->form()->user_feedback('Please go to Account Setup and Activate User ID !!!', 'warning');
+  }
+
  ?></form>
 <br/>
 </div><!--frmwrap-->
