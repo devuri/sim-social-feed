@@ -71,9 +71,10 @@ endif;
 ?><div id="frmwrap" >
     <h2><?php _e('Update Settings'); ?></h2>
     <hr/>
-    <div class="description"> <?php
-      _e('Instagram Token');
-      ?></div>
+    <div class="description">
+      <?php _e('Instagram Token'); ?>
+      <br>
+    </div>
   <p/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php
 
@@ -83,6 +84,9 @@ endif;
     if ( false === get_option('wpsf_token')['reset'] ) {
       echo 'Instagram Token Has Been Set<br>';
     } else {
+      echo '<span style="color:#ba315c">';
+      _e('Impotant: Requires Long-live Token (60 Days)');
+      echo '</span><br>';
       echo $this->form()->input('Instagram Token', 'paste your token here');
     }
     echo '<p/>';
