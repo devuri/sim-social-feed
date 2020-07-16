@@ -96,7 +96,7 @@ endif;
   /**
    * update token if its not set
    */
-  if ( true === get_option('wpsf_token')['reset'] ) {
+  if ( true === get_option('wpsf_token')['reset'] || null === get_option('wpsf_token')['reset'] )  {
     echo $this->form()->submit_button('Save Token', 'primary large', 'submit_update_token');
   }
 

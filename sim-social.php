@@ -52,6 +52,9 @@
        * default
        */
       $wpsf_token = array();
+      $wpsf_token['token'] = null;
+      $wpsf_token['reset'] = null;
+
       $wpsf_user_media = array();
       $wpsf_access_token = array();
 
@@ -75,6 +78,9 @@
        * default
        */
       $wpsf_token = array();
+      $wpsf_token['token'] = null;
+      $wpsf_token['reset'] = null;
+
       $wpsf_user_media = array();
       $wpsf_access_token = array();
 
