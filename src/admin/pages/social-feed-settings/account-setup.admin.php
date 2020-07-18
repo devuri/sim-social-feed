@@ -43,6 +43,11 @@ if ( isset( $_POST['submit_activate_id'] ) ) :
       update_option('simsf_user', $igsf_profile);
       echo $this->form()->user_feedback('IG User Info Has Been Updated !!!');
 
+      # check the user info
+      if ( ! SimIG\Instagram_Social\SimSocialFeed::user_check() ) {
+        echo $this->form()->user_feedback('User Activation Failed. <br> Configuration data is missing or incorrect <br> Please check your user token !!!', 'error');
+      }
+
 endif;
 
 
@@ -119,14 +124,20 @@ endif;
 
 
  ?></form>
- <?php if (is_array(get_option('simsf_user'))): ?>
+ <?php if ( SimIG\Instagram_Social\SimSocialFeed::user_check() ): ?>
    The Following Account is Active:
    <br>
    <strong><?php echo get_option('simsf_user')['id']; ?></strong>
    <br>
    <strong><?php echo get_option('simsf_user')['username']; ?></strong>
- <?php endif; ?>
-<hr/><?php
+ <?php endif;
+
+ # check the user info
+    if ( ! SimIG\Instagram_Social\SimSocialFeed::user_check() ) {
+      echo $this->form()->user_feedback('Please Activate User ID. <br> Configuration data is missing or incorrect !!!', 'error');
+    }
+
+  ?><hr/><?php
 echo '<br> <a href="'. esc_url('https://www.youtube.com/watch?v=rWUcb8jXgVA') .'" target="_blank">How To Get Access Token</a>';
 echo '<br> <a href="'. esc_url('https://developers.facebook.com/docs/instagram-basic-display-api/getting-started') .'" target="_blank">Get Started</a>';
 echo '<br> <a href="'. esc_url('https://developers.facebook.com/docs/instagram-basic-display-api') .'" target="_blank">Instagram Basic Display API</a>';

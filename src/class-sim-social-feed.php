@@ -20,7 +20,7 @@ namespace SimIG\Instagram_Social;
 			}
 			return true;
 		}
-		
+
 		/**
 		 * error_message()
 		 *
@@ -29,6 +29,18 @@ namespace SimIG\Instagram_Social;
 		 */
 		public static function error_message(){
 			return 'Error: The Request Failed. <br> Configuration data is missing or incorrect <br> Please check the Account Settings !!!';
+		}
+
+		/**
+		 * check the user ID
+		 * @return boolean
+		 */
+		public static function user_check(){
+			if ( is_numeric(get_option('simsf_user')['id']) ) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		/**
