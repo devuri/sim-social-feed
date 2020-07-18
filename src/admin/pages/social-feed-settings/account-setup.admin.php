@@ -18,7 +18,7 @@ if ( isset( $_POST['submit_update_token'] ) ) :
 
       # Token
       $igtoken = array();
-      $igtoken['access_token'] = $_POST['instagram_token'];
+      $igtoken['access_token'] = sanitize_text_field($_POST['instagram_token']);
       $igtoken['reset'] = false;
 
       # update token
