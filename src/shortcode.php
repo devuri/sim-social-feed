@@ -5,8 +5,8 @@
 	/**
 	 * shortcode to use [ig_socialfeed]
 	 */
-	add_shortcode('ig_socialfeed', 'sfeed_data');
-	function sfeed_data() {
+	add_shortcode('ig_socialfeed', 'simsf_igmedia_data');
+	function simsf_igmedia_data() {
 
 		/**
 		 * load the grid styles
