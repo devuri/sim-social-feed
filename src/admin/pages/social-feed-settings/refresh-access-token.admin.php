@@ -63,7 +63,7 @@ endif;
   /**
    * only show if we have valid user
    */
-  if ( is_array(get_option('simsf_user'))) {
+  if ( SimIG\Instagram_Social\SimSocialFeed::user_check() ) {
     // submit button
     echo $this->form()->submit_button('Get New Token', 'primary large', 'ig_token_update');
   } else {
