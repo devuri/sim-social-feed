@@ -12,7 +12,7 @@
  * Plugin Name:       Sim Social Feed
  * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
  * Description:       Easily Display Social Media Photo Feed for Instagram. The feed will schedule twicedaily updates, you can also update manually with a single click.
- * Version:           1.7.0
+ * Version:           1.7.1
  * Requires at least: 3.4
  * Requires PHP:      5.6
  * Author:            SwitchWebdev.com
@@ -51,16 +51,16 @@
       /**
        * default
        */
-      $wpsf_token = array();
-      $wpsf_token['token'] = null;
-      $wpsf_token['reset'] = null;
+      $simsf_token = array();
+      $simsf_token['token'] = null;
+      $simsf_token['reset'] = null;
 
-      $wpsf_user_media = array();
-      $wpsf_access_token = array();
+      $simsf_user_media = array();
+      $simsf_access_token = array();
 
-      update_option('wpsf_token',$wpsf_token);
-      update_option('wpsf_user_media',$wpsf_user_media);
-      update_option('wpsf_access_token',$wpsf_access_token);
+      update_option('simsf_token',$simsf_token);
+      update_option('simsf_user_media',$simsf_user_media);
+      update_option('simsf_access_token',$simsf_access_token);
     }
 
     /**
@@ -77,16 +77,16 @@
       /**
        * default
        */
-      $wpsf_token = array();
-      $wpsf_token['token'] = null;
-      $wpsf_token['reset'] = null;
+      $simsf_token = array();
+      $simsf_token['token'] = null;
+      $simsf_token['reset'] = null;
 
-      $wpsf_user_media = array();
-      $wpsf_access_token = array();
+      $simsf_user_media = array();
+      $simsf_access_token = array();
 
-      update_option('wpsf_token',$wpsf_token);
-      update_option('wpsf_user_media',$wpsf_user_media);
-      update_option('wpsf_access_token',$wpsf_access_token);
+      update_option('simsf_token',$simsf_token);
+      update_option('simsf_user_media',$simsf_user_media);
+      update_option('simsf_access_token',$simsf_access_token);
     }
 
 
@@ -111,7 +111,7 @@
        * how to get the token
        * @link https://www.youtube.com/watch?v=rWUcb8jXgVA
        */
-      $instagram = new EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay(get_option('wpsf_token')['access_token']);
+      $instagram = new EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay(get_option('simsf_token')['access_token']);
 
       /**
        * get the object

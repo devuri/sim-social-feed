@@ -17,7 +17,7 @@ if ( isset( $_POST['refresh_instagram_feed'] ) ) :
     # UPDATE USER MEDIA
     if ( SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
       $ig_user_media = SimIG\Instagram_Social\SimSocialFeed::user_media();
-      update_option('wpsf_user_media', $ig_user_media->data );
+      update_option('simsf_user_media', $ig_user_media->data );
       echo $this->form()->user_feedback('IG Feed Has Been Updated !!!');
     endif;
 
@@ -45,7 +45,7 @@ endif;
     /**
      * only show if we have valid user
      */
-    if ( is_array(get_option('wpsf_user'))) {
+    if ( is_array(get_option('simsf_user'))) {
       # submit button
       echo $this->form()->submit_button('Refresh Instagram Feed', 'primary large', 'refresh_instagram_feed');
     } else {
