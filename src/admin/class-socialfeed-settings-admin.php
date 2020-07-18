@@ -20,7 +20,7 @@ final class Social_Feed_Admin extends AdminPage {
     $menu[] = 'social_feed_callback';
     $menu[] = 'dashicons-camera-alt';
     $menu[] = null;
-    $menu[] = 'wpsf';
+    $menu[] = 'simsf';
     $menu[] = plugin_dir_path( __FILE__ );
     return $menu;
   }
