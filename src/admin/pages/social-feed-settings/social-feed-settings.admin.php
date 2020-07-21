@@ -29,6 +29,8 @@ endif;
     <hr/>
     <div class="description">
       <?php _e('Regfresh Instagram Posts'); ?>
+      <br>
+      <?php _e('Use [ig_socialfeed] to Display Instagram Posts'); ?>
     </div>
   <p/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php

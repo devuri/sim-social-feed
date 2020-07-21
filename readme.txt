@@ -41,12 +41,6 @@ This section describes how to install the plugin and get it working.
 
 Instagram Basic Display API only provides read-access to basic data.
 
-
-== Screenshots ==
-
-1.
-2.
-
 == Changelog ==
 
 
