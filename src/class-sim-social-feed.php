@@ -71,7 +71,7 @@ namespace SimIG\Instagram_Social;
 			 * get user data
 			 * @var [type]
 			 */
-			$user_media = simsocial()->getUserMedia($id,6);
+			$user_media = simsocial()->getUserMedia($id,49);
 
 			/**
 			 * get media
@@ -99,6 +99,7 @@ namespace SimIG\Instagram_Social;
 			echo '<div class="row" style="display: inline-flex; flex-wrap: wrap; '.$css.'">';
 			if(is_array(get_option('simsf_user_media'))){
 				foreach (get_option('simsf_user_media') as $mkey => $media) {
+					if($media->media_type == 'VIDEO') continue;
 					echo '<div class="ig-image" style="margin:2px;"><a href="'.$media->permalink.'" target="_blank"><img class="img-responsive" width="'.$w.'" src="'.$media->media_url.'" alt="'.$media->caption.'"></a></div>';
 				}
 			}
@@ -110,12 +111,20 @@ namespace SimIG\Instagram_Social;
 		 *
 		 * @return
 		 */
-		public static function igfeed(){
+		public static function igfeed($limit = 6){
 			?><div class="ig-photo-container">
 				<div class="ig-photo-feed"><?php
 					if(is_array(get_option('simsf_user_media'))){
+
+						/**
+						 * Get IG list
+						 * limit the return values
+						 */
+						$i = 0;
 						foreach (get_option('simsf_user_media') as $mkey => $media) {
-							echo '<img src="'.$media->media_url.'" alt="'.$media->caption.'">';
+							if($media->media_type == 'VIDEO') continue;
+								echo '<img src="'.$media->media_url.'" alt="'.$media->caption.'">';
+							if(++$i == $limit) break;
 						}
 					} ?></div>
 			</div><?php
