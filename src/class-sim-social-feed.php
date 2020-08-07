@@ -82,6 +82,17 @@ namespace SimIG\Instagram_Social;
 		}
 
 		/**
+		 * Calculate the date based on 60 Day Token
+		 * @param  int $expires_in The number of seconds until the long-lived token expires.
+		 * @return string
+		 */
+		function expires($expires_in = 5184000){
+			$days = intval(intval($expires_in) / (3600*24));
+			$expires_date = date_i18n( get_option( 'date_format' ), strtotime( "+$days days" ) );
+			return $expires_date;
+		}
+
+		/**
 		 * refresh_token()
 		 *
 		 * convert token object to array
@@ -90,6 +101,11 @@ namespace SimIG\Instagram_Social;
 		public static function refresh_token(){
 			$newtoken = simsocial()->refreshToken(get_option('simsf_token')['access_token']);
 			$user_token = (array) $newtoken;
+
+			/**
+			 * add a expire date
+			 */
+			$user_token['expire_date'] = self::expires($user_token['expires_in']);
 			return $user_token;
 		}
 
