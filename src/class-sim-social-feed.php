@@ -36,10 +36,12 @@ namespace SimIG\Instagram_Social;
 		 * @return boolean
 		 */
 		public static function user_check(){
-			if ( is_numeric(get_option('simsf_user')['id']) ) {
-				return true;
-			} else {
-				return false;
+			if (isset(get_option('simsf_user')['id'])) {
+				if ( is_numeric(get_option('simsf_user')['id']) ) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 
