@@ -96,6 +96,7 @@ namespace SimIG\Instagram_Social;
 		 * refresh_token()
 		 *
 		 * convert token object to array
+		 * add created and expire date
 		 * @return array
 		 */
 		public static function refresh_token(){
@@ -103,9 +104,11 @@ namespace SimIG\Instagram_Social;
 			$user_token = (array) $newtoken;
 
 			/**
-			 * add a expire date
+			 * add a expire date and created date
+			 * uses Unix timestamp
 			 */
-			$user_token['expire_date'] = self::expires($user_token['expires_in']);
+			$user_token['expire_date']	= time() + $user_token['expires_in'];
+			$user_token['created_at'] 	= time();
 			return $user_token;
 		}
 
