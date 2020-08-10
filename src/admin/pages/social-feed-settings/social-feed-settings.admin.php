@@ -26,7 +26,6 @@ if ( isset( $_POST['refresh_instagram_feed'] ) ) :
 endif;
 ?><div id="frmwrap" >
     <h2><?php _e('Get New Instagram Posts'); ?></h2>
-    <hr/>
     <div class="description">
       <?php _e('Regfresh Instagram Posts'); ?>
       <br>
@@ -34,12 +33,6 @@ endif;
     </div>
   <p/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php
-
-    /**
-     * get images
-     */
-    SimIG\Instagram_Social\SimSocialFeed::images('240');
-    echo '<hr/>';
 
   // nonce_field
   $this->form()->nonce();
@@ -53,6 +46,13 @@ endif;
     } else {
       echo $this->form()->user_feedback('Please go to Account Setup and Activate User ID !!!', 'warning');
     }
+
+    /**
+     * get images
+     */
+    echo '<hr/>';
+    SimIG\Instagram_Social\SimSocialFeed::images('240');
+    echo '<hr/>';
 
  ?></form>
 <br/>

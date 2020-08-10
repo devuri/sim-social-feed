@@ -76,18 +76,15 @@ endif;
 ?><div id="frmwrap" >
     <h2><?php _e('Update Settings'); ?></h2>
     <hr/>
-    <div class="description">
-      <?php _e('Instagram Token'); ?>
-      <br>
-    </div>
   <p/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php
 
     /**
      * build out form fields here
      */
+    echo $this->form()->table('open');
     if ( false === get_option('simsf_token')['reset'] ) {
-      echo 'Instagram Token Has Been Set<br>';
+      _e('Instagram Token Has Been Set');
     } else {
       echo '<span style="color:#ba315c">';
       _e('Impotant: Requires Long-live Token (60 Days)');
@@ -95,12 +92,10 @@ endif;
       echo $this->form()->input('Instagram Token', 'paste your token here');
     }
     echo '<p/>';
-
+    echo $this->form()->table('close');
 
   // generate nonce_field
   $this->form()->nonce();
-
-
 
   /**
    * update token if its not set
@@ -108,7 +103,6 @@ endif;
   if ( true === get_option('simsf_token')['reset'] || null === get_option('simsf_token')['reset'] )  {
     echo $this->form()->submit_button('Save Token', 'primary large', 'submit_update_token');
   }
-
 
   /**
    * activate user or reset the token
