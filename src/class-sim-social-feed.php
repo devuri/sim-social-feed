@@ -109,7 +109,32 @@ namespace SimIG\Instagram_Social;
 			 */
 			$user_token['expire_date']	= time() + $user_token['expires_in'];
 			$user_token['created_at'] 	= time();
+			$user_token['refresh'] 			= true;
 			return $user_token;
+		}
+
+		/**
+		 * check if the token has been Refreshed
+		 * @return boolean [description]
+		 */
+		private static function has_refresh(){
+			if ( get_option('simsf_access_token')['refresh'] ) {
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * get the token epire date
+		 * @return [type] [description]
+		 */
+		public static function token_expire_date(){
+			if ( self::has_refresh() ) {
+				$expire = get_option('simsf_access_token')['expire_date'];
+				$date = date_i18n( get_option( 'date_format' ), $expire );
+				return $date;
+			}
+			return 'no expire date was found ! ';
 		}
 
 		/**
