@@ -37,6 +37,10 @@ if ( isset( $_POST['ig_token_update'] ) ) :
 endif;
 ?><div id="frmwrap" >
     <h2><?php _e('Refresh and Update User Access Token'); ?></h2>
+    <?php _e('Token Expire Date: '); ?>
+    <span style="color: #cc0000;">
+      <?php echo SimIG\Instagram_Social\SimSocialFeed::token_expire_date(); ?>
+    </span>
     <hr/>
     <div class="description">
       <?php _e('Get new Instagram Token'); ?>
@@ -51,10 +55,8 @@ endif;
       <br>
       <?php _e('Refreshed tokens are valid for 60 days from the date at which they are refreshed.'); ?>
       <br>
-      <a href="https://developers.facebook.com/docs/instagram-basic-display-api/reference/refresh_access_token" target="_blank"><?php _e('User Access Tokens'); ?></a>
     </div>
   <p/>
-  <hr/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php
 
   // generate nonce_field
@@ -71,5 +73,6 @@ endif;
   }
 
  ?></form>
-<br/>
 </div><!--frmwrap-->
+<br/><hr/>
+<a href="https://developers.facebook.com/docs/instagram-basic-display-api/reference/refresh_access_token" target="_blank"><?php _e('User Access Tokens'); ?></a>
