@@ -12,14 +12,14 @@ if ( isset( $_POST['ig_token_update'] ) ) :
   }
 
     # SOMETHING WENT WRONG WITH THE REQUEST
-    if ( ! SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
-      echo $this->form()->user_feedback(SimIG\Instagram_Social\SimSocialFeed::error_message(), 'error');
+    if ( ! SimSocialFeed\InstagramSocialFeed::is_request_ok() ) :
+      echo $this->form()->user_feedback(SimSocialFeed\InstagramSocialFeed::error_message(), 'error');
     endif;
 
     # REQUEST TOKEN UPDATE
-    if ( SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
+    if ( SimSocialFeed\InstagramSocialFeed::is_request_ok() ) :
       # get new token
-      $newtoken = SimIG\Instagram_Social\SimSocialFeed::refresh_token();
+      $newtoken = SimSocialFeed\InstagramSocialFeed::refresh_token();
 
       # update the token
       update_option('simsf_access_token', $newtoken );
@@ -39,7 +39,7 @@ endif;
     <h2><?php _e('Refresh and Update User Access Token'); ?></h2>
     <?php _e('Token Expire Date: '); ?>
     <span style="color: #cc0000;">
-      <?php echo SimIG\Instagram_Social\SimSocialFeed::token_expire_date(); ?>
+      <?php echo SimSocialFeed\InstagramSocialFeed::token_expire_date(); ?>
     </span>
     <hr/>
     <div class="description">
@@ -65,7 +65,7 @@ endif;
   /**
    * only show if we have valid user
    */
-  if ( SimIG\Instagram_Social\SimSocialFeed::user_check() ) {
+  if ( SimSocialFeed\InstagramSocialFeed::user_check() ) {
     // submit button
     echo $this->form()->submit_button('Get New Token', 'primary large', 'ig_token_update');
   } else {

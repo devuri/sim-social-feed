@@ -10,13 +10,13 @@ if ( isset( $_POST['refresh_instagram_feed'] ) ) :
   }
 
     # SOMETHING WENT WRONG WITH THE REQUEST
-    if ( ! SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
-      echo $this->form()->user_feedback(SimIG\Instagram_Social\SimSocialFeed::error_message(), 'error');
+    if ( ! SimSocialFeed\InstagramSocialFeed::is_request_ok() ) :
+      echo $this->form()->user_feedback(SimSocialFeed\InstagramSocialFeed::error_message(), 'error');
     endif;
 
     # UPDATE USER MEDIA
-    if ( SimIG\Instagram_Social\SimSocialFeed::is_request_ok() ) :
-      $ig_user_media = SimIG\Instagram_Social\SimSocialFeed::user_media();
+    if ( SimSocialFeed\InstagramSocialFeed::is_request_ok() ) :
+      $ig_user_media = SimSocialFeed\InstagramSocialFeed::user_media();
       update_option('simsf_user_media', $ig_user_media->data );
       echo $this->form()->user_feedback('IG Feed Has Been Updated !!!');
     endif;
@@ -40,7 +40,7 @@ endif;
     /**
      * only show if we have valid user
      */
-    if ( SimIG\Instagram_Social\SimSocialFeed::user_check() ) {
+    if ( SimSocialFeed\InstagramSocialFeed::user_check() ) {
       # submit button
       echo $this->form()->submit_button('Refresh Instagram Feed', 'primary large', 'refresh_instagram_feed');
     } else {
@@ -51,7 +51,7 @@ endif;
      * get images
      */
     echo '<hr/>';
-    SimIG\Instagram_Social\SimSocialFeed::images('240');
+    SimSocialFeed\InstagramSocialFeed::images('240');
     echo '<hr/>';
 
  ?></form>

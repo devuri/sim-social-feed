@@ -1,6 +1,6 @@
 <?php
 
-namespace WPAdminPage;
+namespace SimSocialFeed\WPAdminPage;
 
 /**
  * ----------------------------------------------------------------------------
@@ -16,7 +16,7 @@ namespace WPAdminPage;
 
 if (!defined('ABSPATH')) exit;
 
-if (!class_exists('WPAdminPage\Admin\Form\FormHelper')) {
+
   final class FormHelper {
 
 
@@ -380,4 +380,3 @@ if (!class_exists('WPAdminPage\Admin\Form\FormHelper')) {
     }
 
   }
-}

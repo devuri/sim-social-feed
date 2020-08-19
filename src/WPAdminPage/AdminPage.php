@@ -10,14 +10,13 @@
  * @link      	https://github.com/devuri/wp-admin-page/
  */
 
-namespace WPAdminPage;
+namespace SimSocialFeed\WPAdminPage;
 
-use WPAdminPage\FormHelper as Form;
+use SimSocialFeed\WPAdminPage\FormHelper as Form;
 
 if (!defined('ABSPATH')) exit;
 
 
-if (!class_exists('WPAdminPage\AdminPage')) {
   abstract class AdminPage {
 
     /**
@@ -154,15 +153,15 @@ if (!class_exists('WPAdminPage\AdminPage')) {
       $default['id'] 	        = 'no-ID-provided';
       $default['pro'] 	      = false;
       $default['mcolor'] 	    = $this->mcolor;
-      $default['page_title'] 	= $args[0];
-      $default['menu_title'] 	= $args[1];
-      $default['capability'] 	= $args[2];
-      $default['menu_slug'] 	= $args[3];
+      $default['page_title'] 	= 'Page Title';
+      $default['menu_title'] 	= 'Title';
+      $default['capability'] 	= 'manage_options';
+      $default['menu_slug'] 	= null;
       $default['function'] 	  = array( $this, 'menu_callback' );
-      $default['icon_url'] 	  = $args[5];
+      $default['icon_url'] 	  = null;
       $default['position'] 	  = null;
-      $default['prefix']      = $args[7];
-      $default['plugin_path'] = $args[8];
+      $default['prefix']      = null;
+      $default['plugin_path'] = plugin_dir_path( __FILE__ );
       $args = wp_parse_args( $args , $default );
 
       /**
@@ -570,4 +569,3 @@ if (!class_exists('WPAdminPage\AdminPage')) {
     }
 
   }//class
-}

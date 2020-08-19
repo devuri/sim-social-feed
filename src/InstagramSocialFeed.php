@@ -1,11 +1,11 @@
 <?php
 
-namespace SimIG\Instagram_Social;
+namespace SimSocialFeed;
 
 	/**
 	 *
 	 */
-	class SimSocialFeed
+	class InstagramSocialFeed
 	{
 
 		/**
@@ -118,8 +118,10 @@ namespace SimIG\Instagram_Social;
 		 * @return boolean [description]
 		 */
 		private static function has_refresh(){
-			if ( get_option('simsf_access_token')['refresh'] ) {
-				return true;
+			if (!empty(get_option('simsf_access_token'))) {
+				if ( get_option('simsf_access_token')['refresh'] ) {
+					return true;
+				}
 			}
 			return false;
 		}
