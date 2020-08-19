@@ -7,9 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInitd7e54b283c57504fcb44f1d17c61f634
 {
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'S' => 
         array (
-            'WPAdminPage\\' => 12,
+            'SimSocialFeed\\' => 14,
         ),
         'E' => 
         array (
@@ -18,9 +18,9 @@ class ComposerStaticInitd7e54b283c57504fcb44f1d17c61f634
     );
 
     public static $prefixDirsPsr4 = array (
-        'WPAdminPage\\' => 
+        'SimSocialFeed\\' => 
         array (
-            0 => __DIR__ . '/..' . '/devuri/wp-admin-page/src',
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'EspressoDev\\InstagramBasicDisplay\\' => 
         array (
@@ -28,11 +28,21 @@ class ComposerStaticInitd7e54b283c57504fcb44f1d17c61f634
         ),
     );
 
+    public static $classMap = array (
+        'EspressoDev\\InstagramBasicDisplay\\InstagramBasicDisplay' => __DIR__ . '/..' . '/espresso-dev/instagram-basic-display-php/src/InstagramBasicDisplay.php',
+        'EspressoDev\\InstagramBasicDisplay\\InstagramBasicDisplayException' => __DIR__ . '/..' . '/espresso-dev/instagram-basic-display-php/src/InstagramBasicDisplayException.php',
+        'SimSocialFeed\\Admin\\SocialFeedAdmin' => __DIR__ . '/../..' . '/src/Admin/SocialFeedAdmin.php',
+        'SimSocialFeed\\InstagramSocialFeed' => __DIR__ . '/../..' . '/src/InstagramSocialFeed.php',
+        'SimSocialFeed\\WPAdminPage\\AdminPage' => __DIR__ . '/../..' . '/src/WPAdminPage/AdminPage.php',
+        'SimSocialFeed\\WPAdminPage\\FormHelper' => __DIR__ . '/../..' . '/src/WPAdminPage/FormHelper.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitd7e54b283c57504fcb44f1d17c61f634::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitd7e54b283c57504fcb44f1d17c61f634::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitd7e54b283c57504fcb44f1d17c61f634::$classMap;
 
         }, null, ClassLoader::class);
     }

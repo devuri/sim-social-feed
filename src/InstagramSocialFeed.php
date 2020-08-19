@@ -1,11 +1,11 @@
 <?php
 
-namespace SimIG\Instagram_Social;
+namespace SimSocialFeed;
 
 	/**
 	 *
 	 */
-	class SimSocialFeed
+	class InstagramSocialFeed
 	{
 
 		/**

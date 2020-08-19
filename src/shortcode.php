@@ -1,6 +1,6 @@
 <?php
 
-	use SimIG\Instagram_Social\SimSocialFeed;
+	use SimSocialFeed\InstagramSocialFeed;
 
 	/**
 	 * shortcode to use [ig_socialfeed limit="6"]
@@ -21,7 +21,7 @@
 		wp_enqueue_style('sim-social-feed-grid');
 
 		ob_start();
-		SimSocialFeed::igfeed($limit);
+		InstagramSocialFeed::igfeed($limit);
 		$output_sfd = ob_get_contents();
 		ob_end_clean();
 		return $output_sfd;

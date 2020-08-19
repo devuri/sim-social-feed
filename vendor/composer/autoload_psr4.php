@@ -6,6 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'WPAdminPage\\' => array($vendorDir . '/devuri/wp-admin-page/src'),
+    'SimSocialFeed\\' => array($baseDir . '/src'),
     'EspressoDev\\InstagramBasicDisplay\\' => array($vendorDir . '/espresso-dev/instagram-basic-display-php/src'),
 );

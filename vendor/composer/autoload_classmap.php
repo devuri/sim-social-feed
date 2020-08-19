@@ -6,4 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'EspressoDev\\InstagramBasicDisplay\\InstagramBasicDisplay' => $vendorDir . '/espresso-dev/instagram-basic-display-php/src/InstagramBasicDisplay.php',
+    'EspressoDev\\InstagramBasicDisplay\\InstagramBasicDisplayException' => $vendorDir . '/espresso-dev/instagram-basic-display-php/src/InstagramBasicDisplayException.php',
+    'SimSocialFeed\\Admin\\SocialFeedAdmin' => $baseDir . '/src/Admin/SocialFeedAdmin.php',
+    'SimSocialFeed\\InstagramSocialFeed' => $baseDir . '/src/InstagramSocialFeed.php',
+    'SimSocialFeed\\WPAdminPage\\AdminPage' => $baseDir . '/src/WPAdminPage/AdminPage.php',
+    'SimSocialFeed\\WPAdminPage\\FormHelper' => $baseDir . '/src/WPAdminPage/FormHelper.php',
 );
