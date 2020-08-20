@@ -147,8 +147,13 @@ namespace SimSocialFeed;
 			echo '<div class="row" style="display: inline-flex; flex-wrap: wrap; '.$css.'">';
 			if(is_array(get_option('simsf_user_media'))){
 				foreach (get_option('simsf_user_media') as $mkey => $media) {
+					if ( isset($media->caption) ) {
+						$caption = $media->caption;
+					} else {
+						$caption = '';
+					}
 					if($media->media_type == 'VIDEO') continue;
-					echo '<div class="ig-image" style="margin:2px;"><a href="'.$media->permalink.'" target="_blank"><img class="img-responsive" width="'.$w.'" src="'.$media->media_url.'" alt="'.$media->caption.'"></a></div>';
+					echo '<div class="ig-image" style="margin:2px;"><a href="'.$media->permalink.'" target="_blank"><img class="img-responsive" width="'.$w.'" src="'.$media->media_url.'" alt="'.$caption.'"></a></div>';
 				}
 			}
 		  echo '</div>';
@@ -170,8 +175,13 @@ namespace SimSocialFeed;
 						 */
 						$i = 0;
 						foreach (get_option('simsf_user_media') as $mkey => $media) {
+							if ( isset($media->caption) ) {
+								$caption = $media->caption;
+							} else {
+								$caption = '';
+							}
 							if($media->media_type == 'VIDEO') continue;
-								echo '<img src="'.$media->media_url.'" alt="'.$media->caption.'">';
+								echo '<img src="'.$media->media_url.'" alt="'.$caption.'">';
 							if(++$i == $limit) break;
 						}
 					} ?></div>
