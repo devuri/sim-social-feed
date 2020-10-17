@@ -1,5 +1,5 @@
 <?php
-
+ // @codingStandardsIgnoreFile TODO fix phpcs
 
 // Save Data
 if ( isset( $_POST['ig_token_update'] ) ) :

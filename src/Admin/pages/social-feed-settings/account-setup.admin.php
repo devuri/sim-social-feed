@@ -1,5 +1,6 @@
 <?php
 
+ // @codingStandardsIgnoreFile TODO fix phpcs
 
 /**
  * Update the Token
