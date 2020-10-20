@@ -126,7 +126,7 @@ class InstagramSocialFeed
 	 * @return string $date
 	 */
 	public static function token_expire_date() {
-		if ( self::has_rfresh() ) {
+		if ( self::has_refresh() ) {
 			$expire = get_option( 'simsf_access_token' )['expire_date'];
 			$date = date_i18n( get_option( 'date_format' ), $expire );
 			return $date;
