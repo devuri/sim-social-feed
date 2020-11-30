@@ -1,3 +1,5 @@
+> **Note:** This is the development version and contains features that may be in various stages of development. If you want to use this on a live website download here: [Sim Social Feed](https://wordpress.org/plugins/sim-social-feed/).
+
 ## Sim Social Feed is a free Instagram Feed Plugin Basic Display API
 Sim Social Feed is a free Instagram Feed Plugin, that lets you include Instagram photos
 in a post page or anywhere else on your WordPress website.
