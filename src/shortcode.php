@@ -4,8 +4,11 @@
 
 	/**
 	 * Shortcode to use [ig_socialfeed limit="6" linked="yes"]
+	 *
+	 * @param  array $atts .
+	 *
+	 * @return string $output_sfd
 	 */
-	add_shortcode( 'ig_socialfeed', 'simsf_igmedia_feed' );
 	function simsf_igmedia_feed( $atts ) {
 
 		$a = shortcode_atts(
@@ -39,3 +42,4 @@
 
 		return $output_sfd;
 	}
+	add_shortcode( 'ig_socialfeed', 'simsf_igmedia_feed' );
