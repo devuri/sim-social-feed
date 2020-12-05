@@ -1,6 +1,6 @@
 <?php
  // @codingStandardsIgnoreFile TODO fix phpcs
- 
+
 // Save Data
 if ( isset( $_POST['refresh_instagram_feed'] ) ) :
 
@@ -31,7 +31,7 @@ endif;
     <div class="description">
       <?php _e('Regfresh Instagram Posts'); ?>
       <br>
-      <?php _e('Use <strong>[ig_socialfeed]</strong> to Display Instagram Posts'); ?>
+      <?php _e('Use <strong>[igfeed]</strong> to Display Instagram Posts'); ?>
     </div>
   <p/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php
@@ -53,7 +53,7 @@ endif;
      * get images
      */
     echo '<hr/>';
-    SimSocialFeed\InstagramSocialFeed::images('240');
+    SimSocialFeed\InstagramFeed::admin_view();
     echo '<hr/>';
 
  ?></form>
