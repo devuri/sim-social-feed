@@ -33,6 +33,8 @@ class ComposerStaticInitd7e54b283c57504fcb44f1d17c61f634
         'EspressoDev\\InstagramBasicDisplay\\InstagramBasicDisplayException' => __DIR__ . '/..' . '/espresso-dev/instagram-basic-display-php/src/InstagramBasicDisplayException.php',
         'SimSocialFeed\\Admin\\SocialFeedAdmin' => __DIR__ . '/../..' . '/src/Admin/SocialFeedAdmin.php',
         'SimSocialFeed\\InstagramData' => __DIR__ . '/../..' . '/src/InstagramData.php',
+        'SimSocialFeed\\InstagramFeed' => __DIR__ . '/../..' . '/src/InstagramFeed.php',
+        'SimSocialFeed\\View\\Display' => __DIR__ . '/../..' . '/src/View/Display.php',
         'SimSocialFeed\\WPAdminPage\\AdminPage' => __DIR__ . '/../..' . '/src/WPAdminPage/AdminPage.php',
         'SimSocialFeed\\WPAdminPage\\FormHelper' => __DIR__ . '/../..' . '/src/WPAdminPage/FormHelper.php',
     );
