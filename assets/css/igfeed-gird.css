@@ -1,0 +1,96 @@
+.igfeed-container {
+  margin: 0 auto;
+}
+
+.igfeed {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* justify-content: flex-start; */
+  justify-content: center;
+  align-content: stretch;
+  padding: 0;
+}
+
+.igfeed-item {
+    display: block;
+    float: left;
+    flex: 0 0 auto;
+	padding: 2px;
+	position: relative;
+}
+
+/* item description */
+.igfeed-item-info {
+	display: none;
+	font-size: small;
+	padding: 8px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0);
+	transform: translate(-50%, -50%);
+	transition: background-color 300ms linear;
+}
+
+.igfeed-item-info p {
+    font-weight: 600;
+	vertical-align: middle;
+	color: rgba(255, 255, 255, 0);
+	text-align: center;
+	transition: color 300ms linear;
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.igfeed-item:hover .igfeed-item-info,
+.igfeed-item:focus .igfeed-item-info {
+	display: block;
+    background-color: rgba(0, 0, 0, .6);
+}
+
+.igfeed-item-info:hover p {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* item description */
+
+@media screen and (min-width: 1024px) {
+  .igfeed-item {
+    width: calc(100%/6);
+    height: calc(100%/6);
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .igfeed-item {
+    width: calc(100%/4);
+    height: calc(100%/4);
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .igfeed-item {
+    width: calc(100%/3);
+    height: calc(100%/3);
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .igfeed-item {
+    width: calc(100%/2);
+    height: calc(100%/2);
+  }
+}
+
+@media screen  and (max-width: 320px) {
+  .igfeed-item {
+    width: 100%;
+    height: 100%;
+  }
+}

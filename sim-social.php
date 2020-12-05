@@ -93,7 +93,7 @@
 	// register styles.
     add_action( 'init', function() {
 
-	    	wp_register_style( 'sim-social-feed-grid', plugin_dir_url( __FILE__ ) . 'assets/css/simsocial-photo-gird.css', array(), '1.4.3', 'all' );
+	    	wp_register_style( 'igfeed-grid', plugin_dir_url( __FILE__ ) . 'assets/css/igfeed-gird.css', array(), '1.6.3', 'all' );
 	    }
 	);
 
