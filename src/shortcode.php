@@ -1,9 +1,9 @@
 <?php
 
-	use SimSocialFeed\InstagramSocialFeed;
+	use SimSocialFeed\InstagramFeed;
 
 	/**
-	 * Shortcode to use [ig_socialfeed limit="6" linked="yes"]
+	 * Shortcode to use [igfeed limit="6" linked="yes"]
 	 *
 	 * @param  array $atts .
 	 *
@@ -13,28 +13,21 @@
 
 		$a = shortcode_atts(
 			array(
-				'limit'  => 6,
-				'linked' => 'no',
+				'limit'   => 6,
+				'linked'  => 'no',
+				'caption' => 'off',
 			),
 			$atts
 		);
 
-		// params .
-		$limit = absint( $a['limit'] );
-		$linked = strtolower( $a['linked'] );
-
 		/**
 		 * Load the grid styles
 		 */
-		wp_enqueue_style( 'sim-social-feed-grid' );
+		wp_enqueue_style( 'igfeed-grid' );
 
 		ob_start();
 
-		if ( 'yes' === $linked ) {
-			InstagramSocialFeed::igfeedlinked( $limit );
-		} else {
-			InstagramSocialFeed::igfeed( $limit );
-		}
+			InstagramFeed::view( $a );
 
 		$output_sfd = ob_get_contents();
 
@@ -42,4 +35,4 @@
 
 		return $output_sfd;
 	}
-	add_shortcode( 'ig_socialfeed', 'simsf_igmedia_feed' );
+	add_shortcode( 'igfeed', 'simsf_igmedia_feed' );
