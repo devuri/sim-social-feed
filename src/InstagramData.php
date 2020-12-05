@@ -2,8 +2,22 @@
 
 namespace SimSocialFeed;
 
-class InstagramSocialFeed
+use EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay;
+
+class InstagramData
 {
+
+	/**
+	 * Setup the IG class
+	 *
+	 * Initialize the feed API
+	 * how to get the token
+	 *
+	 * @link https://www.youtube.com/watch?v=rWUcb8jXgVA
+	 */
+	public static function api() {
+		return new InstagramBasicDisplay( get_option( 'simsf_token' )['access_token'] );
+	}
 
 	/**
 	 * Lets make sure all is well
@@ -12,7 +26,7 @@ class InstagramSocialFeed
 	 */
 	public static function is_request_ok() {
 		try {
-			simsocial()->getUserProfile();
+			self::api()->getUserProfile();
 		} catch ( \Exception $e ) {
 			return false;
 		}
@@ -46,12 +60,13 @@ class InstagramSocialFeed
 
 	/**
 	 * User profile
-	 * convert user data object to array
+	 *
+	 * Convert user data object to array
 	 *
 	 * @return array
 	 */
 	public static function user_profile() {
-		$user = simsocial()->getUserProfile();
+		$user = self::api()->getUserProfile();
 		$user_data = (array) $user;
 		return $user_data;
 	}
@@ -67,7 +82,7 @@ class InstagramSocialFeed
 		$id = get_option( 'simsf_user' )['id'];
 
 		// get the media.
-		$user_media = simsocial()->getUserMedia( $id, 49 );
+		$user_media = self::api()->getUserMedia( $id, 40 );
 
 		// media.
 		return $user_media;
@@ -93,7 +108,7 @@ class InstagramSocialFeed
 	 * @return array
 	 */
 	public static function refresh_token() {
-		$newtoken = simsocial()->refreshToken( get_option( 'simsf_token' )['access_token'] );
+		$newtoken = self::api()->refreshToken( get_option( 'simsf_token' )['access_token'] );
 		$user_token = (array) $newtoken;
 
 		/**
