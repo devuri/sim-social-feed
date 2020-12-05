@@ -23,10 +23,21 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-    // deny direct access.
+ 	// deny direct access.
     if ( ! defined( 'WPINC' ) ) {
-    	die;
+     	die;
     }
+
+    /**
+     * Load composer
+     */
+    require_once 'vendor/autoload.php';
+
+    // require_once / schedule.
+    require_once plugin_dir_path( __FILE__ ) . '/src/schedule.php';
+
+    // require_once / shortcode.
+    require_once plugin_dir_path( __FILE__ ) . '/src/shortcode.php';
 
     /**
      * Setup some defualts setup activation schedule
@@ -79,40 +90,12 @@
 	    }
 	);
 
-    /**
-     * Load composer
-     */
-    require_once 'vendor/autoload.php';
-
-    // require_once / schedule.
-    require_once plugin_dir_path( __FILE__ ) . '/src/schedule.php';
-
-    // require_once / shortcode.
-    require_once plugin_dir_path( __FILE__ ) . '/src/shortcode.php';
-
 	// register styles.
     add_action( 'init', function() {
 
 	    	wp_register_style( 'igfeed-grid', plugin_dir_url( __FILE__ ) . 'assets/css/igfeed-gird.css', array(), '1.6.3', 'all' );
 	    }
 	);
-
-    /**
-     * Setup the IG class
-     */
-    function simsocial() {
-	    /**
-	     * Initialize the feed API
-	     * how to get the token
-	     *
-	     * @link https://www.youtube.com/watch?v=rWUcb8jXgVA
-	     */
-      	$instagram = new EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay( get_option( 'simsf_token' )['access_token'] );
-
-      	// Get IG the object.
-      	return $instagram;
-    }
-
 
     /**
      * Create admin pages
