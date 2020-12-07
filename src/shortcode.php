@@ -3,7 +3,7 @@
 	use SimSocialFeed\InstagramFeed;
 
 	/**
-	 * Shortcode to use [igfeed limit="6" linked="yes"]
+	 * Shortcode to use [igfeed limit="6" links="on" caption="on"]
 	 *
 	 * @param  array $atts .
 	 *
@@ -14,10 +14,9 @@
 		$a = shortcode_atts(
 			array(
 				'limit'   => 6,
-				'linked'  => 'no',
+				'links'   => 'off',
 				'caption' => 'off',
-			),
-			$atts
+			), $atts, 'igfeed'
 		);
 
 		/**

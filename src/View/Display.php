@@ -12,7 +12,7 @@ class Display
 	 * @param string $w   .
 	 * @param string $css .
 	 */
-	public function admin_view( $limit = 6, $w = '240', $css = '' ) {
+	public function admin_view( $limit = 24, $w = '240', $css = '' ) {
 		echo '<div class="row" style="display: inline-flex; flex-wrap: wrap; ' . $css . '">'; // @codingStandardsIgnoreLine
 			if ( is_array( get_option( 'simsf_user_media' ) ) ) {
 				/**
@@ -45,16 +45,19 @@ class Display
 
 		$defaults = array(
 		  	'limit'   => 6,
-		  	'linked'  => 'no',
+		  	'links'   => 'off',
 		  	'caption' => 'off',
 		);
 		$args = wp_parse_args( $args, $defaults );
+
+		// make sure these ar lowercase strings.
+		$args = array_map( 'strtolower', $args );
 
 		// make sure limit is integer.
 		$args['limit'] = absint( $args['limit'] );
 
 		// caption and linked.
-		if ( 'yes' === $args['linked'] && 'on' === $args['caption'] ) {
+		if ( 'on' === $args['links'] && 'on' === $args['caption'] ) {
 			return $this->view_linked_caption( $args['limit'] );
 		}
 
@@ -64,7 +67,7 @@ class Display
 		}
 
 		// linked without caption.
-		if ( 'yes' === $args['linked'] ) {
+		if ( 'on' === $args['links'] ) {
 			return $this->view_linked( $args['limit'] );
 		}
 
