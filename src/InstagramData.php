@@ -6,6 +6,27 @@ use EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay;
 
 class InstagramData
 {
+	/**
+	 * Get defined Access Token
+	 *
+	 * @return mixed bool|string
+	 */
+	public static function access_token() {
+
+		if ( ! isset( get_option( 'simsf_token' )['access_token'] ) ) {
+			return false;
+		}
+
+		if ( false === get_option( 'simsf_token' )['access_token'] ) {
+			return false;
+		}
+
+		if ( empty( get_option( 'simsf_token' )['access_token'] ) ) {
+			return false;
+		}
+
+		return get_option( 'simsf_token' )['access_token'];
+	}
 
 	/**
 	 * Setup the IG class
@@ -14,9 +35,10 @@ class InstagramData
 	 * how to get the token
 	 *
 	 * @link https://www.youtube.com/watch?v=rWUcb8jXgVA
+	 * @link https://github.com/espresso-dev/instagram-basic-display-php
 	 */
 	public static function api() {
-		return new InstagramBasicDisplay( get_option( 'simsf_token' )['access_token'] );
+		return new InstagramBasicDisplay( self::access_token() );
 	}
 
 	/**
@@ -108,7 +130,7 @@ class InstagramData
 	 * @return array
 	 */
 	public static function refresh_token() {
-		$newtoken = self::api()->refreshToken( get_option( 'simsf_token' )['access_token'] );
+		$newtoken = self::api()->refreshToken( self::access_token() );
 		$user_token = (array) $newtoken;
 
 		/**
