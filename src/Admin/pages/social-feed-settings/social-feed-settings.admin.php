@@ -31,7 +31,7 @@ endif;
     <div class="description">
       <?php _e('Regfresh Instagram Posts'); ?>
       <br>
-      <?php _e('Use <strong>[igfeed]</strong> to Display Instagram Posts'); ?>
+      <?php _e('Use <strong>[igfeed limit="6" links="on" caption="on"]</strong> to Display Instagram Posts'); ?>
     </div>
   <p/>
 <form action="" method="POST"	enctype="multipart/form-data"><?php
