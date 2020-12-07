@@ -9,7 +9,7 @@ if ( isset( $_POST['submit_update_token'] ) ) :
 
   # lets verify the nonce
   if ( ! $this->form()->verify_nonce()  ) {
-    wp_die($this->form()->user_feedback('Verification Failed !!!' , 'error'));
+    wp_die($this->form()->user_feedback( 'Verification Failed !!!' , 'error' ) );
   }
 
     # set the token value
@@ -34,20 +34,27 @@ endif;
  */
 if ( isset( $_POST['submit_activate_id'] ) ) :
 
-    # lets verify the nonce
+    // lets verify the nonce
     if ( ! $this->form()->verify_nonce()  ) {
       wp_die($this->form()->user_feedback('Verification Failed !!!' , 'error'));
     }
 
-      # update user info
-      $igsf_profile =  SimSocialFeed\InstagramData::user_profile();
-      update_option('simsf_user', $igsf_profile);
-      echo $this->form()->user_feedback('IG User Info Has Been Updated !!!');
+    // update user info
+    $igsf_profile =  SimSocialFeed\InstagramData::user_profile();
+    update_option('simsf_user', $igsf_profile);
+    echo $this->form()->user_feedback('User Info Has Been Updated !!!');
 
-      # check the user info
-      if ( ! SimSocialFeed\InstagramData::user_check() ) {
+	// Update user data.
+	if ( SimSocialFeed\InstagramData::is_request_ok() ) :
+        $ig_user_media = SimSocialFeed\InstagramData::user_media();
+        update_option( 'simsf_user_media', $ig_user_media->data );
+        echo $this->form()->user_feedback( 'Instagram Feed Has Been Updated !!!' );
+    endif;
+
+    # check the user info
+    if ( ! SimSocialFeed\InstagramData::user_check() ) {
         echo $this->form()->user_feedback('User Activation Failed. <br> Configuration data is missing or incorrect <br> Please check your user token !!!', 'error');
-      }
+    }
 
 endif;
 
@@ -85,7 +92,7 @@ endif;
      */
     echo $this->form()->table('open');
     if ( false === get_option('simsf_token')['reset'] ) {
-      _e('Instagram Token Has Been Set');
+      _e('Instagram Token Has Been Set, You can now Activate User ID to complete the setup.');
     } else {
       echo '<span style="color:#ba315c">';
       _e('Impotant: Requires Long-live Token (60 Days)');
