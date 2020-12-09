@@ -11,7 +11,7 @@
 	 */
 	function simsf_igmedia_feed( $atts ) {
 
-		$a = shortcode_atts(
+		$args = shortcode_atts(
 			array(
 				'limit'   => 6,
 				'links'   => 'off',
@@ -26,7 +26,7 @@
 
 		ob_start();
 
-			InstagramFeed::view( $a );
+			InstagramFeed::view( $args );
 
 		$output_sfd = ob_get_contents();
 
