@@ -166,7 +166,12 @@ class InstagramData
 	public static function maybe_refresh_token() {
 
 		if ( self::is_40_days_since_refresh() ) {
+
 			self::refresh_token();
+
+			// notify admin user.
+			$admin_email = get_option( 'admin_email' );
+			wp_mail( $admin_email, '[Sim Social Feed]: Access Token update', 'Instagram User Access Token Has Been Updated' );
 		}
 	}
 
