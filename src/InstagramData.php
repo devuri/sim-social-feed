@@ -158,7 +158,7 @@ class InstagramData
 	}
 
 	/**
-	 * Get the token epire date
+	 * Get the token expire date
 	 *
 	 * @return string $date
 	 */
@@ -169,6 +169,22 @@ class InstagramData
 			return $date;
 		}
 		return 'no expire date was found ! ';
+	}
+
+	/**
+	 * Get the token created at date
+	 *
+	 * When was the last token refreshed.
+	 *
+	 * @return string $date
+	 */
+	public static function token_created_date() {
+		if ( self::has_refresh() ) {
+			$created_date = get_option( 'simsf_access_token' )['created_at'];
+			$date = date_i18n( get_option( 'date_format' ), $created_date);
+			return $date;
+		}
+		return 'no date was found ! ';
 	}
 
 }
