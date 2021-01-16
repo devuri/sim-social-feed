@@ -118,8 +118,56 @@ class InstagramData
 	 */
 	public function expires( $expires_in = 5184000 ) {
 		$days = intval( intval( $expires_in ) / ( 3600 * 24 ) );
-	$expires_date = date_i18n( get_option( 'date_format' ), strtotime( "+$days days" ) );
+		$expires_date = date_i18n( get_option( 'date_format' ), strtotime( "+$days days" ) );
 		return $expires_date;
+	}
+
+	/**
+	 * lets only refresh after 48 hours.
+	 */
+	public static function is_48_hours_since_refresh() {
+
+		if ( self::has_refresh() ) {
+
+			$created_date = get_option( 'simsf_access_token' )['created_at'];
+
+			$next_refresh_can = strtotime('+2 day', $created_date );
+
+			// check time since last refresh.
+			if ( time() >= $next_refresh_can ) {
+				return true;
+			}
+			return false;
+		}
+	}
+
+	/**
+	 * 40 Days since last refresh.
+	 */
+	public static function is_40_days_since_refresh() {
+
+		if ( self::has_refresh() ) {
+
+			$created_date = get_option( 'simsf_access_token' )['created_at'];
+
+			$next_refresh = $created_date + 40 * 24 * 3600;
+
+			// check time since last refresh.
+			if ( time() >= $next_refresh ) {
+				return true;
+			}
+			return false;
+		}
+	}
+
+	/**
+	 * Automatic token refresh.
+	 */
+	public static function auto_refresh() {
+
+		if ( self::is_40_days_since_refresh() ) {
+			// do auto refesh and send email to admin.
+		}
 	}
 
 	/**
@@ -130,6 +178,7 @@ class InstagramData
 	 * @return array
 	 */
 	public static function refresh_token() {
+
 		$newtoken = self::api()->refreshToken( self::access_token() );
 		$user_token = (array) $newtoken;
 
@@ -186,5 +235,4 @@ class InstagramData
 		}
 		return 'no date was found ! ';
 	}
-
 }
