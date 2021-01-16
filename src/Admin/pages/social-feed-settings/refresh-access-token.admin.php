@@ -45,6 +45,10 @@ endif;
     <span style="color: #cc0000;">
       <?php echo SimSocialFeed\InstagramData::token_expire_date(); ?>
     </span>
+	<br>
+	<span style="color: #1b8a20;">
+      	<?php _e('Access Token will automatically refresh before it expires, if the refresh is not successful you will get a notification to do a manual refresh.'); ?>
+    </span>
     <hr/>
     <div class="description">
       <?php _e('Get new Instagram Token'); ?>

@@ -163,10 +163,10 @@ class InstagramData
 	/**
 	 * Automatic token refresh.
 	 */
-	public static function auto_refresh() {
+	public static function maybe_refresh_token() {
 
 		if ( self::is_40_days_since_refresh() ) {
-			// do auto refesh and send email to admin.
+			self::refresh_token();
 		}
 	}
 
