@@ -12,7 +12,7 @@ class Display
 	 * @param string $w   .
 	 * @param string $css .
 	 */
-	public function admin_view( $limit = 24, $w = '240', $css = '' ) {
+	public function admin_view( $limit = 12, $w = '240', $css = '' ) {
 		echo '<div class="row" style="display: inline-flex; flex-wrap: wrap; ' . $css . '">'; // @codingStandardsIgnoreLine
 			if ( is_array( get_option( 'simsf_user_media' ) ) ) {
 				/**
