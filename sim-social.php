@@ -33,12 +33,6 @@
      */
     require_once 'vendor/autoload.php';
 
-    // require_once / schedule.
-    require_once plugin_dir_path( __FILE__ ) . '/src/schedule.php';
-
-    // require_once / shortcode.
-    require_once plugin_dir_path( __FILE__ ) . '/src/shortcode.php';
-
     /**
      * Setup some defualts setup activation schedule
      */

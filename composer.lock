@@ -46,6 +46,10 @@
                 "api",
                 "instagram"
             ],
+            "support": {
+                "issues": "https://github.com/espresso-dev/instagram-basic-display-php/issues",
+                "source": "https://github.com/espresso-dev/instagram-basic-display-php/tree/v1.1.4"
+            },
             "time": "2020-10-22T07:42:32+00:00"
         }
     ],
@@ -57,5 +61,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
