@@ -197,7 +197,7 @@ class InstagramData
 
 			Regards,
 			[Sim Social Feed] plugin Notification.
-			###SITEURL###'
+			Sent from: ###SITEURL###'
 		);
 
 		// message vars.
