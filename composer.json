@@ -7,8 +7,8 @@
 	        "SimSocialFeed\\":"src"
 		},
 			"files": [
-			"src/schedule.php",
-			"src/shortcode.php"
+			"src/inc/schedule.php",
+			"src/inc/shortcode.php"
 		]
     },
     "config": {

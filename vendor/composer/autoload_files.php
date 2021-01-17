@@ -6,6 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    '6df4ba8aa0eb44690143d69c920df9e0' => $baseDir . '/src/schedule.php',
-    'dd9ebc777b0f370dc67051f78ae35b7e' => $baseDir . '/src/shortcode.php',
+    '093fbfaa4cdc8ea32d361aff980a84c1' => $baseDir . '/src/inc/schedule.php',
+    '3213a95feb320bb104f2e0e4c12d4952' => $baseDir . '/src/inc/shortcode.php',
 );

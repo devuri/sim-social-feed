@@ -24,24 +24,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '2.7.2.x-dev',
-    'version' => '2.7.2.9999999-dev',
+    'pretty_version' => '2.7.3.x-dev',
+    'version' => '2.7.3.9999999-dev',
     'aliases' => 
     array (
     ),
-    'reference' => '638a172c185dac9652568aeb8bf4675aab0fdfd5',
+    'reference' => 'ba6037cb8d8583971e5aef8541e44b7d2d385e5b',
     'name' => '__root__',
   ),
   'versions' => 
   array (
     '__root__' => 
     array (
-      'pretty_version' => '2.7.2.x-dev',
-      'version' => '2.7.2.9999999-dev',
+      'pretty_version' => '2.7.3.x-dev',
+      'version' => '2.7.3.9999999-dev',
       'aliases' => 
       array (
       ),
-      'reference' => '638a172c185dac9652568aeb8bf4675aab0fdfd5',
+      'reference' => 'ba6037cb8d8583971e5aef8541e44b7d2d385e5b',
     ),
     'espresso-dev/instagram-basic-display-php' => 
     array (
