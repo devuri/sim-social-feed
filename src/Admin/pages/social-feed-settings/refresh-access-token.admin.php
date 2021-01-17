@@ -37,11 +37,11 @@ if ( isset( $_POST['ig_token_update'] ) ) :
 endif;
 ?><div id="frmwrap" >
     <h2><?php _e('Refresh and Update User Access Token'); ?></h2>
-	<?php _e('Token Was Last Updated: '); ?>
+	<?php _e('Token was last updated: '); ?>
 	<span style="color: #cc0000;">
 	  <?php echo SimSocialFeed\InstagramData::token_created_date(); ?>
   </span> -
-    <?php _e('Token Will Expire: '); ?>
+    <?php _e('Token will expire: '); ?>
     <span style="color: #cc0000;">
       <?php echo SimSocialFeed\InstagramData::token_expire_date(); ?>
     </span>
