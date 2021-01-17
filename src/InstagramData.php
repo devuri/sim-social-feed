@@ -170,9 +170,40 @@ class InstagramData
 			self::refresh_token();
 
 			// notify admin user.
-			$admin_email = get_option( 'admin_email' );
-			wp_mail( $admin_email, '[Sim Social Feed]: Access Token update', 'Instagram User Access Token Has Been Updated' );
+			$admin_user = get_option( 'admin_email' );
+			$subject = '[Sim Social Feed]: Access Token update';
+			$message = self::notification();
+			wp_mail( $admin_user, $subject, $message );
 		}
+	}
+
+	/**
+	 * Notification for Access Token update.
+	 * @return string
+	 */
+	public static function notification() {
+		$message_text = __(
+			'Hi,
+
+			This notification confirms that your Instagram User Access Token Has Been Updated on ###SITENAME###.
+
+			Refreshed tokens are valid for 60 days from the date at which they are refreshed.
+			The Sim Social Feed plugin will automatically refresh your Access Token before it expires.
+
+			This email has been sent to ###ADMIN_EMAIL###.
+
+			Regards,
+			[Sim Social Feed] plugin Notification.
+			###SITEURL###'
+		);
+
+		// message.
+		$blog_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		$message_text = str_replace( '###SITENAME###', $blog_name, $message_text );
+		$message_text = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message_text );
+		$message_text = str_replace( '###SITEURL###', home_url(), $message_text );
+
+		return nl2br( $message_text );
 	}
 
 	/**
