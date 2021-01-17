@@ -197,6 +197,8 @@ class InstagramData
 
 			Regards,
 			[Sim Social Feed] plugin Notification.
+
+			You have received this email notification to update you about your ###SITENAME### website.
 			Sent from: ###SITEURL###'
 		);
 
