@@ -7,9 +7,9 @@
 	        "SimSocialFeed\\":"src"
 		},
 			"files": [
-			"src/inc/schedule.php",
-			"src/inc/shortcode.php"
-		]
+				"src/inc/schedule.php",
+				"src/inc/shortcode.php"
+			]
     },
     "config": {
     "optimize-autoloader": true
