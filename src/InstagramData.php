@@ -123,9 +123,28 @@ class InstagramData
 	}
 
 	/**
+	 * lets only refresh after 24 hours.
+	 */
+	public static function is_24_hours_since() {
+
+		if ( self::has_refresh() ) {
+
+			$created_date = get_option( 'simsf_access_token' )['created_at'];
+
+			$next_refresh_can = strtotime('+1 day', $created_date );
+
+			// check time since last refresh.
+			if ( time() >= $next_refresh_can ) {
+				return true;
+			}
+			return false;
+		}
+	}
+
+	/**
 	 * lets only refresh after 48 hours.
 	 */
-	public static function is_48_hours_since_refresh() {
+	public static function is_48_hours_since() {
 
 		if ( self::has_refresh() ) {
 
@@ -142,9 +161,28 @@ class InstagramData
 	}
 
 	/**
+	 * 30 Days since last refresh.
+	 */
+	public static function is_30_days_since() {
+
+		if ( self::has_refresh() ) {
+
+			$created_date = get_option( 'simsf_access_token' )['created_at'];
+
+			$next_refresh = strtotime('+30 day', $created_date );
+
+			// check time since last refresh.
+			if ( time() >= $next_refresh ) {
+				return true;
+			}
+			return false;
+		}
+	}
+
+	/**
 	 * 40 Days since last refresh.
 	 */
-	public static function is_40_days_since_refresh() {
+	public static function is_40_days_since() {
 
 		if ( self::has_refresh() ) {
 
@@ -161,60 +199,34 @@ class InstagramData
 	}
 
 	/**
-	 * Automatic token refresh.
+	 * 45 Days since last refresh.
 	 */
-	public static function maybe_refresh_token() {
+	public static function is_45_days_since() {
 
-		if ( self::is_40_days_since_refresh() ) {
+		if ( self::has_refresh() ) {
 
-			self::refresh_token();
+			$created_date = get_option( 'simsf_access_token' )['created_at'];
 
-			// notify admin user.
-			$admin_user = get_option( 'admin_email' );
-			$subject = 'Re: Access Token update ' . wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-			$message = self::notification();
-			wp_mail( $admin_user, $subject, $message );
+			$next_refresh = strtotime('+45 day', $created_date );
+
+			// check time since last refresh.
+			if ( time() >= $next_refresh ) {
+				return true;
+			}
+			return false;
 		}
 	}
 
 	/**
-	 * Notification for Access Token update.
-	 * @return string
+	 * Automatic token refresh.
 	 */
-	public static function notification() {
+	public static function maybe_refresh_token() {
 
-		$message_text = __(
-			'Hi,
+		if ( self::is_45_days_since() ) {
 
-			This notification confirms that your Instagram User Access Token Has Been Updated on ###SITENAME###.
+			self::refresh_token();
 
-			Token was updated: ###CREATED###, Token will expire: ###EXPIRES###.
-
-			Refreshed tokens are valid for 60 days from the date at which they are refreshed.
-			The Sim Social Feed plugin will automatically refresh your Access Token before it expires.
-
-			This email has been sent to ###ADMIN_EMAIL###.
-
-			Regards,
-			[Sim Social Feed] plugin Notification.
-
-			You have received this email notification to update you about your ###SITENAME### website.
-			Sent from: ###SITEURL###'
-		);
-
-		// message vars.
-		$blog_name         = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-		$token_created     = self::token_created_date();
-		$token_will_expire = self::token_expire_date();
-
-		// message
-		$message_text = str_replace( '###SITENAME###', $blog_name, $message_text );
-		$message_text = str_replace( '###CREATED###', $token_created, $message_text );
-		$message_text = str_replace( '###EXPIRES###', $token_will_expire, $message_text );
-		$message_text = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message_text );
-		$message_text = str_replace( '###SITEURL###', home_url(), $message_text );
-
-		return nl2br( $message_text );
+		}
 	}
 
 	/**
@@ -236,6 +248,46 @@ class InstagramData
 		$user_token['expire_date'] = time() + $user_token['expires_in'];
 		$user_token['created_at']  = time();
 		$user_token['refresh']     = true;
+
+		/**
+		 * Notify admin.
+		 */
+		$admin_user = get_option( 'admin_email' );
+		$subject = 'Re: Access Token update ' . wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+
+		// email message.
+		$message = __(
+		'Hi,
+
+		This notification confirms that your Instagram User Access Token Has Been Updated on ###SITENAME###.
+
+		Token was updated: ###CREATED###, Token will expire: ###EXPIRES###.
+
+		Refreshed tokens are valid for 60 days from the date at which they are refreshed.
+		The Sim Social Feed plugin will automatically refresh your Access Token before it expires.
+
+		This email has been sent to ###ADMIN_EMAIL###.
+
+		Regards,
+		[Sim Social Feed] plugin Notification.
+
+		You have received this email notification to update you about your ###SITENAME### website.'
+		);
+
+		// message vars.
+		$blog_name         = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		$token_created     = date_i18n( get_option( 'date_format' ), $user_token['created_at'] );
+		$token_will_expire = date_i18n( get_option( 'date_format' ), $user_token['expire_date'] );
+
+		// message.
+		$message = str_replace( '###SITENAME###', $blog_name, $message );
+		$message = str_replace( '###CREATED###', $token_created, $message );
+		$message = str_replace( '###EXPIRES###', $token_will_expire, $message );
+		$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+
+		// send email.
+		wp_mail( $admin_user, $subject, $message );
+
 		return $user_token;
 	}
 

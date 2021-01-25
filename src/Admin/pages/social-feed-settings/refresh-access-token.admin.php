@@ -1,5 +1,8 @@
 <?php
- // @codingStandardsIgnoreFile TODO fix phpcs
+
+	use SimSocialFeed\InstagramData;
+
+	// @codingStandardsIgnoreFile TODO fix phpcs
 
 // Save Data
 if ( isset( $_POST['ig_token_update'] ) ) :
