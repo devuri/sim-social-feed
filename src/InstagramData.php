@@ -17,6 +17,10 @@ class InstagramData
 			return false;
 		}
 
+		if ( is_null( get_option( 'simsf_token' )['access_token'] ) ) {
+			return false;
+		}
+
 		if ( false === get_option( 'simsf_token' )['access_token'] ) {
 			return false;
 		}
