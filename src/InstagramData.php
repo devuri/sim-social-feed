@@ -253,7 +253,7 @@ class InstagramData
 		 * Notify admin.
 		 */
 		$admin_user = get_option( 'admin_email' );
-		$subject = 'Re: Access Token update ' . wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		$subject = 'New: '. $user_token['created_at'] . ' Access Token Update ' . wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
 		// email message.
 		$message = __(
@@ -284,6 +284,9 @@ class InstagramData
 		$message = str_replace( '###CREATED###', $token_created, $message );
 		$message = str_replace( '###EXPIRES###', $token_will_expire, $message );
 		$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+
+		// update token option.
+		update_option('simsf_access_token', $user_token );
 
 		// send email.
 		wp_mail( $admin_user, $subject, $message );
