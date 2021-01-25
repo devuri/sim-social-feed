@@ -4,7 +4,7 @@ Donate link: https://switchwebdev.com/wordpress-plugins/
 Tags: Instagram, Instagram photos, Instagram feed, Instagram widget, Instagram gallery
 Requires at least: 3.4
 Tested up to: 5.6
-Stable tag: 2.7.3
+Stable tag: 2.7.6
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
