@@ -21,19 +21,10 @@ if ( isset( $_POST['ig_token_update'] ) ) :
 
     # REQUEST TOKEN UPDATE
     if ( SimSocialFeed\InstagramData::is_request_ok() ) :
-      # get new token
-      $newtoken = SimSocialFeed\InstagramData::refresh_token();
 
       # update the token
-      update_option('simsf_access_token', $newtoken );
+       SimSocialFeed\InstagramData::refresh_token();
 
-      # new token array
-      $igtoken = array();
-      $igtoken['access_token'] = get_option('simsf_access_token')['access_token'];
-      $igtoken['reset'] = false;
-
-      # set new token value
-      update_option('simsf_token', $igtoken );
       echo $this->form()->user_feedback('Instagram Token Has Been Updated !!!');
     endif;
 
