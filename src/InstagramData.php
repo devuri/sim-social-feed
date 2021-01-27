@@ -13,6 +13,10 @@ class InstagramData
 	 */
 	public static function access_token() {
 
+		if ( isset( get_option('simsf_access_token')['access_token'] ) ) {
+			return get_option('simsf_access_token')['access_token'];
+		}
+
 		if ( ! isset( get_option( 'simsf_token' )['access_token'] ) ) {
 			return false;
 		}
@@ -127,91 +131,29 @@ class InstagramData
 	}
 
 	/**
-	 * lets only refresh after 24 hours.
+	 * Token Update schedule.
+	 *
+	 * Number of days set for token auto update.
+	 * this returns 40 days by default if not set.
+	 *
+	 * @return int .
 	 */
-	public static function is_24_hours_since() {
-
-		if ( self::has_refresh() ) {
-
-			$created_date = get_option( 'simsf_access_token' )['created_at'];
-
-			$next_refresh_can = strtotime('+1 day', $created_date );
-
-			// check time since last refresh.
-			if ( time() >= $next_refresh_can ) {
-				return true;
-			}
-			return false;
-		}
+	public static function token_update_schedule() {
+		return absint(  get_option( 'simsf_update_schedule', 40 ) );
 	}
 
 	/**
-	 * lets only refresh after 48 hours.
+	 * Days since last refresh.
 	 */
-	public static function is_48_hours_since() {
+	public static function days_since() {
 
 		if ( self::has_refresh() ) {
 
-			$created_date = get_option( 'simsf_access_token' )['created_at'];
-
-			$next_refresh_can = strtotime('+2 day', $created_date );
-
-			// check time since last refresh.
-			if ( time() >= $next_refresh_can ) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	/**
-	 * 30 Days since last refresh.
-	 */
-	public static function is_30_days_since() {
-
-		if ( self::has_refresh() ) {
+			$ds = self::token_update_schedule();
 
 			$created_date = get_option( 'simsf_access_token' )['created_at'];
 
-			$next_refresh = strtotime('+30 day', $created_date );
-
-			// check time since last refresh.
-			if ( time() >= $next_refresh ) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	/**
-	 * 40 Days since last refresh.
-	 */
-	public static function is_40_days_since() {
-
-		if ( self::has_refresh() ) {
-
-			$created_date = get_option( 'simsf_access_token' )['created_at'];
-
-			$next_refresh = $created_date + 40 * 24 * 3600;
-
-			// check time since last refresh.
-			if ( time() >= $next_refresh ) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	/**
-	 * 45 Days since last refresh.
-	 */
-	public static function is_45_days_since() {
-
-		if ( self::has_refresh() ) {
-
-			$created_date = get_option( 'simsf_access_token' )['created_at'];
-
-			$next_refresh = strtotime('+45 day', $created_date );
+			$next_refresh = strtotime("+$ds day", $created_date );
 
 			// check time since last refresh.
 			if ( time() >= $next_refresh ) {
@@ -226,7 +168,7 @@ class InstagramData
 	 */
 	public static function maybe_refresh_token() {
 
-		if ( self::is_45_days_since() ) {
+		if ( self::days_since() ) {
 
 			self::refresh_token();
 
@@ -253,11 +195,12 @@ class InstagramData
 		$user_token['created_at']  = time();
 		$user_token['refresh']     = true;
 
-		/**
-		 * Notify admin.
-		 */
-		$admin_user = get_option( 'admin_email' );
-		$subject = 'New: '. $user_token['created_at'] . ' Access Token Update ' . wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		// message vars.
+  		$blog_name         = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+  		$token_created     = date_i18n( get_option( 'date_format' ), $user_token['created_at'] );
+  		$token_will_expire = date_i18n( get_option( 'date_format' ), $user_token['expire_date'] );
+ 		$admin_user        = get_option( 'admin_email' );
+ 		$subject           = 'New: '. $token_created . ' Access Token Update ' . wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
 		// email message.
 		$message = __(
@@ -278,11 +221,6 @@ class InstagramData
 		You have received this email notification to update you about your ###SITENAME### website.'
 		);
 
-		// message vars.
-		$blog_name         = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-		$token_created     = date_i18n( get_option( 'date_format' ), $user_token['created_at'] );
-		$token_will_expire = date_i18n( get_option( 'date_format' ), $user_token['expire_date'] );
-
 		// message.
 		$message = str_replace( '###SITENAME###', $blog_name, $message );
 		$message = str_replace( '###CREATED###', $token_created, $message );
@@ -291,6 +229,14 @@ class InstagramData
 
 		// update token option.
 		update_option('simsf_access_token', $user_token );
+
+		# new token array
+		$igtoken = array();
+		$igtoken['access_token'] = get_option('simsf_access_token')['access_token'];
+		$igtoken['reset'] = false;
+
+		# set new token value
+		update_option('simsf_token', $igtoken );
 
 		// send email.
 		wp_mail( $admin_user, $subject, $message );
