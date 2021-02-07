@@ -37,7 +37,7 @@ class Display
 	/**
 	 * The feed igfeed()
 	 *
-	 * Shortcode to display the instagram feed [igfeed].
+	 * Shortcode to display the instagram feed [igfeed limit="6" links="on" caption="on"].
 	 *
 	 * @param  array $args .
 	 */
@@ -50,7 +50,7 @@ class Display
 		);
 		$args = wp_parse_args( $args, $defaults );
 
-		// make sure these ar lowercase strings.
+		// make sure these are lowercase strings.
 		$args = array_map( 'strtolower', $args );
 
 		// make sure limit is integer.

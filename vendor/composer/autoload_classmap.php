@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'EspressoDev\\InstagramBasicDisplay\\InstagramBasicDisplay' => $vendorDir . '/espresso-dev/instagram-basic-display-php/src/InstagramBasicDisplay.php',
     'EspressoDev\\InstagramBasicDisplay\\InstagramBasicDisplayException' => $vendorDir . '/espresso-dev/instagram-basic-display-php/src/InstagramBasicDisplayException.php',
     'SimSocialFeed\\Admin\\SocialFeedAdmin' => $baseDir . '/src/Admin/SocialFeedAdmin.php',
