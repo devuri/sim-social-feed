@@ -194,6 +194,9 @@ class InstagramData
 		$user_token['expire_date'] = time() + $user_token['expires_in'];
 		$user_token['created_at']  = time();
 		$user_token['refresh']     = true;
+		
+		// update token option.
+		update_option('simsf_access_token', $user_token );
 
 		// message vars.
   		$blog_name         = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
@@ -227,8 +230,6 @@ class InstagramData
 		$message = str_replace( '###EXPIRES###', $token_will_expire, $message );
 		$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
 
-		// update token option.
-		update_option('simsf_access_token', $user_token );
 
 		# new token array
 		$igtoken = array();
