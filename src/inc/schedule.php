@@ -17,8 +17,6 @@
 
 		/**
 		 * Also check if we need to and refresh token.
-		 *
-		 * runs 40 Days after the last refresh.
 		 */
 		InstagramData::maybe_refresh_token();
 

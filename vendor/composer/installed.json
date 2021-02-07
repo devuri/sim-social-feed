@@ -1,46 +1,51 @@
-[
-    {
-        "name": "espresso-dev/instagram-basic-display-php",
-        "version": "v1.1.4",
-        "version_normalized": "1.1.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/espresso-dev/instagram-basic-display-php.git",
-            "reference": "8b9ac7a7bd3dca6c3a31ca66afe5508e0eae9f28"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/espresso-dev/instagram-basic-display-php/zipball/8b9ac7a7bd3dca6c3a31ca66afe5508e0eae9f28",
-            "reference": "8b9ac7a7bd3dca6c3a31ca66afe5508e0eae9f28",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "php": ">=5.6"
-        },
-        "time": "2020-10-22T07:42:32+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "EspressoDev\\InstagramBasicDisplay\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Herman Schutte",
-                "email": "herman@espresso.dev"
-            }
-        ],
-        "description": "A simple PHP class for accessing the Instagram Basic Display API",
-        "homepage": "https://github.com/espresso-dev/instagram-basic-display-php",
-        "keywords": [
-            "api",
-            "instagram"
-        ]
-    }
-]
+{
+    "packages": [
+        {
+            "name": "espresso-dev/instagram-basic-display-php",
+            "version": "v1.1.4",
+            "version_normalized": "1.1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/espresso-dev/instagram-basic-display-php.git",
+                "reference": "8b9ac7a7bd3dca6c3a31ca66afe5508e0eae9f28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/espresso-dev/instagram-basic-display-php/zipball/8b9ac7a7bd3dca6c3a31ca66afe5508e0eae9f28",
+                "reference": "8b9ac7a7bd3dca6c3a31ca66afe5508e0eae9f28",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.6"
+            },
+            "time": "2020-10-22T07:42:32+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "EspressoDev\\InstagramBasicDisplay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Herman Schutte",
+                    "email": "herman@espresso.dev"
+                }
+            ],
+            "description": "A simple PHP class for accessing the Instagram Basic Display API",
+            "homepage": "https://github.com/espresso-dev/instagram-basic-display-php",
+            "keywords": [
+                "api",
+                "instagram"
+            ],
+            "install-path": "../espresso-dev/instagram-basic-display-php"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

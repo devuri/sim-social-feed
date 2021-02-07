@@ -1,5 +1,9 @@
 <?php
- // @codingStandardsIgnoreFile TODO fix phpcs
+
+	use SimSocialFeed\InstagramData;
+	use SimSocialFeed\InstagramFeed;
+
+	// @codingStandardsIgnoreFile TODO fix phpcs
 
 // Save Data
 if ( isset( $_POST['refresh_instagram_feed'] ) ) :
@@ -12,13 +16,13 @@ if ( isset( $_POST['refresh_instagram_feed'] ) ) :
   }
 
     # SOMETHING WENT WRONG WITH THE REQUEST
-    if ( ! SimSocialFeed\InstagramData::is_request_ok() ) :
-      echo $this->form()->user_feedback(SimSocialFeed\InstagramData::error_message(), 'error');
+    if ( ! InstagramData::is_request_ok() ) :
+      echo $this->form()->user_feedback( InstagramData::error_message(), 'error');
     endif;
 
     # UPDATE USER MEDIA
-    if ( SimSocialFeed\InstagramData::is_request_ok() ) :
-      $ig_user_media = SimSocialFeed\InstagramData::user_media();
+    if ( InstagramData::is_request_ok() ) :
+      $ig_user_media = InstagramData::user_media();
       update_option('simsf_user_media', $ig_user_media->data );
       echo $this->form()->user_feedback('IG Feed Has Been Updated !!!');
     endif;
@@ -42,7 +46,7 @@ endif;
     /**
      * only show if we have valid user
      */
-    if ( SimSocialFeed\InstagramData::user_check() ) {
+    if ( InstagramData::user_check() ) {
       # submit button
       echo $this->form()->submit_button('Refresh Instagram Feed', 'primary large', 'refresh_instagram_feed');
     } else {
@@ -53,7 +57,7 @@ endif;
      * get images
      */
     echo '<hr/>';
-    SimSocialFeed\InstagramFeed::admin_view();
+    	InstagramFeed::admin_view();
     echo '<hr/>';
 
  ?></form>

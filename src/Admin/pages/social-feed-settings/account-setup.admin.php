@@ -1,6 +1,8 @@
 <?php
 
- // @codingStandardsIgnoreFile TODO fix phpcs
+	use SimSocialFeed\InstagramData;
+
+	// @codingStandardsIgnoreFile TODO fix phpcs
 
 /**
  * Update the Token
@@ -40,19 +42,19 @@ if ( isset( $_POST['submit_activate_id'] ) ) :
     }
 
     // update user info
-    $igsf_profile =  SimSocialFeed\InstagramData::user_profile();
+    $igsf_profile =  InstagramData::user_profile();
     update_option('simsf_user', $igsf_profile);
     echo $this->form()->user_feedback('User Info Has Been Updated !!!');
 
 	// Update user data.
-	if ( SimSocialFeed\InstagramData::is_request_ok() ) :
-        $ig_user_media = SimSocialFeed\InstagramData::user_media();
+	if ( InstagramData::is_request_ok() ) :
+        $ig_user_media = InstagramData::user_media();
         update_option( 'simsf_user_media', $ig_user_media->data );
         echo $this->form()->user_feedback( 'Instagram Feed Has Been Updated !!!' );
     endif;
 
     # check the user info
-    if ( ! SimSocialFeed\InstagramData::user_check() ) {
+    if ( ! InstagramData::user_check() ) {
         echo $this->form()->user_feedback('User Activation Failed. <br> Configuration data is missing or incorrect <br> Please check your user token !!!', 'error');
     }
 
@@ -126,7 +128,7 @@ endif;
 
 
  ?></form>
- <?php if ( SimSocialFeed\InstagramData::user_check() ): ?>
+ <?php if ( InstagramData::user_check() ): ?>
    The Following Account is Active:
    <br>
    <strong><?php echo get_option('simsf_user')['id']; ?></strong>
@@ -135,7 +137,7 @@ endif;
  <?php endif;
 
  # check the user info
-    if ( ! SimSocialFeed\InstagramData::user_check() ) {
+    if ( ! InstagramData::user_check() ) {
       echo $this->form()->user_feedback('Please Activate User ID. <br> Configuration data is missing or incorrect !!!', 'error');
     }
 

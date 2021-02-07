@@ -13,7 +13,15 @@ class InstagramData
 	 */
 	public static function access_token() {
 
+		if ( isset( get_option('simsf_access_token')['access_token'] ) ) {
+			return get_option('simsf_access_token')['access_token'];
+		}
+
 		if ( ! isset( get_option( 'simsf_token' )['access_token'] ) ) {
+			return false;
+		}
+
+		if ( is_null( get_option( 'simsf_token' )['access_token'] ) ) {
 			return false;
 		}
 
@@ -123,34 +131,29 @@ class InstagramData
 	}
 
 	/**
-	 * lets only refresh after 48 hours.
+	 * Token Update schedule.
+	 *
+	 * Number of days set for token auto update.
+	 * this returns 40 days by default if not set.
+	 *
+	 * @return int .
 	 */
-	public static function is_48_hours_since_refresh() {
-
-		if ( self::has_refresh() ) {
-
-			$created_date = get_option( 'simsf_access_token' )['created_at'];
-
-			$next_refresh_can = strtotime('+2 day', $created_date );
-
-			// check time since last refresh.
-			if ( time() >= $next_refresh_can ) {
-				return true;
-			}
-			return false;
-		}
+	public static function token_update_schedule() {
+		return absint(  get_option( 'simsf_update_schedule', 40 ) );
 	}
 
 	/**
-	 * 40 Days since last refresh.
+	 * Days since last refresh.
 	 */
-	public static function is_40_days_since_refresh() {
+	public static function days_since() {
 
 		if ( self::has_refresh() ) {
 
+			$ds = self::token_update_schedule();
+
 			$created_date = get_option( 'simsf_access_token' )['created_at'];
 
-			$next_refresh = $created_date + 40 * 24 * 3600;
+			$next_refresh = strtotime("+$ds day", $created_date );
 
 			// check time since last refresh.
 			if ( time() >= $next_refresh ) {
@@ -165,8 +168,10 @@ class InstagramData
 	 */
 	public static function maybe_refresh_token() {
 
-		if ( self::is_40_days_since_refresh() ) {
+		if ( self::days_since() ) {
+
 			self::refresh_token();
+
 		}
 	}
 
@@ -189,6 +194,54 @@ class InstagramData
 		$user_token['expire_date'] = time() + $user_token['expires_in'];
 		$user_token['created_at']  = time();
 		$user_token['refresh']     = true;
+		
+		// update token option.
+		update_option('simsf_access_token', $user_token );
+
+		// message vars.
+  		$blog_name         = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+  		$token_created     = date_i18n( get_option( 'date_format' ), $user_token['created_at'] );
+  		$token_will_expire = date_i18n( get_option( 'date_format' ), $user_token['expire_date'] );
+ 		$admin_user        = get_option( 'admin_email' );
+ 		$subject           = 'New: '. $token_created . ' Access Token Update ' . wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+
+		// email message.
+		$message = __(
+		'Hi,
+
+		This notification confirms that your Instagram User Access Token Has Been Updated on ###SITENAME###.
+
+		Token was updated: ###CREATED###, Token will expire: ###EXPIRES###.
+
+		Refreshed tokens are valid for 60 days from the date at which they are refreshed.
+		The Sim Social Feed plugin will automatically refresh your Access Token before it expires.
+
+		This email has been sent to ###ADMIN_EMAIL###.
+
+		Regards,
+		[Sim Social Feed] plugin Notification.
+
+		You have received this email notification to update you about your ###SITENAME### website.'
+		);
+
+		// message.
+		$message = str_replace( '###SITENAME###', $blog_name, $message );
+		$message = str_replace( '###CREATED###', $token_created, $message );
+		$message = str_replace( '###EXPIRES###', $token_will_expire, $message );
+		$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+
+
+		# new token array
+		$igtoken = array();
+		$igtoken['access_token'] = get_option('simsf_access_token')['access_token'];
+		$igtoken['reset'] = false;
+
+		# set new token value
+		update_option('simsf_token', $igtoken );
+
+		// send email.
+		wp_mail( $admin_user, $subject, $message );
+
 		return $user_token;
 	}
 

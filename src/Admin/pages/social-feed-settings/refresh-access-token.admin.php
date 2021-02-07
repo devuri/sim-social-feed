@@ -1,5 +1,8 @@
 <?php
- // @codingStandardsIgnoreFile TODO fix phpcs
+
+	use SimSocialFeed\InstagramData;
+
+	// @codingStandardsIgnoreFile TODO fix phpcs
 
 // Save Data
 if ( isset( $_POST['ig_token_update'] ) ) :
@@ -18,30 +21,21 @@ if ( isset( $_POST['ig_token_update'] ) ) :
 
     # REQUEST TOKEN UPDATE
     if ( SimSocialFeed\InstagramData::is_request_ok() ) :
-      # get new token
-      $newtoken = SimSocialFeed\InstagramData::refresh_token();
 
       # update the token
-      update_option('simsf_access_token', $newtoken );
+       SimSocialFeed\InstagramData::refresh_token();
 
-      # new token array
-      $igtoken = array();
-      $igtoken['access_token'] = get_option('simsf_access_token')['access_token'];
-      $igtoken['reset'] = false;
-
-      # set new token value
-      update_option('simsf_token', $igtoken );
       echo $this->form()->user_feedback('Instagram Token Has Been Updated !!!');
     endif;
 
 endif;
 ?><div id="frmwrap" >
     <h2><?php _e('Refresh and Update User Access Token'); ?></h2>
-	<?php _e('Token Was Last Updated: '); ?>
+	<?php _e('Token was last updated: '); ?>
 	<span style="color: #cc0000;">
 	  <?php echo SimSocialFeed\InstagramData::token_created_date(); ?>
   </span> -
-    <?php _e('Token Will Expire: '); ?>
+    <?php _e('Token will expire: '); ?>
     <span style="color: #cc0000;">
       <?php echo SimSocialFeed\InstagramData::token_expire_date(); ?>
     </span>

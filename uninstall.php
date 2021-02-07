@@ -19,6 +19,9 @@
 		die;
 	}
 
+	// Clear scheduled events.
+	wp_clear_scheduled_hook( 'sim_social_feed_cron' );
+
    	// delete settings in the options table.
   	delete_option( 'simsf_token' );
   	delete_option( 'simsf_access_token' );
