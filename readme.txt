@@ -3,7 +3,7 @@ Contributors: icelayer
 Donate link: https://switchwebdev.com/wordpress-plugins/
 Tags: Instagram, Instagram photos, Instagram feed, Instagram widget, Instagram gallery
 Requires at least: 3.4
-Tested up to: 5.6
+Tested up to: 5.7
 Stable tag: 2.8.1
 Requires PHP: 5.6
 License: GPLv2 or later
