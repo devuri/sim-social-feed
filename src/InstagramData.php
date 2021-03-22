@@ -184,6 +184,10 @@ class InstagramData
 	 */
 	public static function refresh_token() {
 
+		/* get previous update date */
+		$previously = date_i18n( get_option( 'date_format' ), $user_token['created_at'] );
+
+		/* setup api */
 		$newtoken = self::api()->refreshToken( self::access_token() );
 		$user_token = (array) $newtoken;
 
@@ -194,7 +198,7 @@ class InstagramData
 		$user_token['expire_date'] = time() + $user_token['expires_in'];
 		$user_token['created_at']  = time();
 		$user_token['refresh']     = true;
-		
+
 		// update token option.
 		update_option('simsf_access_token', $user_token );
 
@@ -216,6 +220,8 @@ class InstagramData
 		Refreshed tokens are valid for 60 days from the date at which they are refreshed.
 		The Sim Social Feed plugin will automatically refresh your Access Token before it expires.
 
+		Token was last Updated: ###PREVIOUS###
+
 		This email has been sent to ###ADMIN_EMAIL###.
 
 		Regards,
@@ -228,15 +234,15 @@ class InstagramData
 		$message = str_replace( '###SITENAME###', $blog_name, $message );
 		$message = str_replace( '###CREATED###', $token_created, $message );
 		$message = str_replace( '###EXPIRES###', $token_will_expire, $message );
+		$message = str_replace( '###PREVIOUS###', $previously, $message );
 		$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
 
-
-		# new token array
+		// new token array
 		$igtoken = array();
 		$igtoken['access_token'] = get_option('simsf_access_token')['access_token'];
 		$igtoken['reset'] = false;
 
-		# set new token value
+		// set new token value
 		update_option('simsf_token', $igtoken );
 
 		// send email.
