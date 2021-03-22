@@ -28,14 +28,10 @@
      	die;
     }
 
-    /**
-     * Load composer
-     */
+    // Load composer.
     require_once 'vendor/autoload.php';
 
-    /**
-     * Setup some defualts setup activation schedule
-     */
+    // Setup some defualts setup activation schedule.
     register_activation_hook( __FILE__, function() {
 
 	       	/**
@@ -48,9 +44,7 @@
 		        wp_schedule_event( time(), 'twicedaily', 'sim_social_feed_cron' );
 		    }
 
-			/**
-			 * Setup some defaults
-			 */
+			// Setup some defaults.
 			$simsf_token = array();
 			$simsf_token['token'] = null;
 			$simsf_token['reset'] = null;
@@ -61,19 +55,13 @@
 	    }
 	);
 
-    /**
-     * Handle Deactivation
-     */
+    // Handle Deactivation.
     register_deactivation_hook( __FILE__, function() {
 
-		    /**
-		     * Remove the scheduled event
-		     */
+		    // Remove the scheduled event.
 		    wp_clear_scheduled_hook( 'sim_social_feed_cron' );
 
-		    /**
-		     * Setup some defaults
-		     */
+		    // Setup some defaults.
 		    $simsf_token = array();
 		    $simsf_token['token'] = null;
 		    $simsf_token['reset'] = null;
@@ -91,7 +79,5 @@
 	    }
 	);
 
-    /**
-     * Create admin pages
-     */
+    // Create admin pages.
     SimSocialFeed\Admin\SocialFeedAdmin::init();
