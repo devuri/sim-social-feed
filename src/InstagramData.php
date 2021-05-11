@@ -211,7 +211,7 @@ class InstagramData
 
 		// email message.
 		$message = __(
-		'Hi,
+		'Hey there!
 
 		This notification confirms that your Instagram User Access Token Has Been Updated on ###SITENAME###.
 
@@ -235,7 +235,8 @@ class InstagramData
 		$message = str_replace( '###CREATED###', $token_created, $message );
 		$message = str_replace( '###EXPIRES###', $token_will_expire, $message );
 		$message = str_replace( '###PREVIOUS###', $previously, $message );
-		$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+		//$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+		$message = str_replace( '###ADMIN_EMAIL###', self::notification_email(), $message );
 
 		// new token array
 		$igtoken = array();
@@ -249,6 +250,18 @@ class InstagramData
 		wp_mail( $admin_user, $subject, $message );
 
 		return $user_token;
+	}
+
+	/**
+	 * Notification about auto updates.
+	 *
+	 * @return string .
+	 */
+	public static function notification_email() {
+		if ( get_option( 'simsf_notification_email', false ) ) {
+			return get_option( 'simsf_notification_email' );
+		}
+		get_option( 'admin_email' );
 	}
 
 	/**
