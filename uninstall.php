@@ -27,6 +27,7 @@
   	delete_option( 'simsf_access_token' );
   	delete_option( 'simsf_user' );
   	delete_option( 'simsf_user_media' );
+  	delete_option( 'simsf_notification_email' );
 
 
   	// finally clear the cache.
