@@ -1,22 +1,15 @@
 <?php
 /**
- * Sim Social Feed
- *
- * @package   SimSocialFeed
- * @author    Uriel Wilson
- * @copyright 2020 Uriel Wilson
- * @license   GPL-2.0
- * @link      https://urielwilson.com
  *
  * @wordpress-plugin
  * Plugin Name:       Sim Social Feed
- * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
+ * Plugin URI:        https://wpbrisko.com/wordpress-plugins/
  * Description:       Easily Display Social Media Photo Feed for Instagram. The feed will schedule twicedaily updates, you can also update manually with a single click.
- * Version:           2.9.1
+ * Version:           2.9.3
  * Requires at least: 3.4
  * Requires PHP:      5.6
- * Author:            Uriel Wilson
- * Author URI:        https://urielwilson.com
+ * Author:            wpbrisko.com
+ * Author URI:        https://wpbrisko.com
  * Text Domain:       sim-social-feed
  * Domain Path:       languages
  * License:           GPLv2

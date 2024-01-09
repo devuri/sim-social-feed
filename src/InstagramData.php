@@ -96,9 +96,7 @@ class InstagramData
 	 * @return array
 	 */
 	public static function user_profile() {
-		$user = self::api()->getUserProfile();
-		$user_data = (array) $user;
-		return $user_data;
+		return (array) self::api()->getUserProfile();
 	}
 
 	/**
@@ -302,8 +300,7 @@ class InstagramData
 	public static function token_created_date() {
 		if ( self::has_refresh() ) {
 			$created_date = get_option( 'simsf_access_token' )['created_at'];
-			$date = date_i18n( get_option( 'date_format' ), $created_date);
-			return $date;
+			return date_i18n( get_option( 'date_format' ), $created_date);
 		}
 		return 'no date was found ! ';
 	}
