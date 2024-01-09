@@ -96,9 +96,7 @@ class InstagramData
 	 * @return array
 	 */
 	public static function user_profile() {
-		$user = self::api()->getUserProfile();
-		$user_data = (array) $user;
-		return $user_data;
+		return (array) self::api()->getUserProfile();
 	}
 
 	/**
@@ -184,6 +182,10 @@ class InstagramData
 	 */
 	public static function refresh_token() {
 
+		/* get previous update date */
+		$previously = date_i18n( get_option( 'date_format' ), $user_token['created_at'] );
+
+		/* setup api */
 		$newtoken = self::api()->refreshToken( self::access_token() );
 		$user_token = (array) $newtoken;
 
@@ -194,7 +196,7 @@ class InstagramData
 		$user_token['expire_date'] = time() + $user_token['expires_in'];
 		$user_token['created_at']  = time();
 		$user_token['refresh']     = true;
-		
+
 		// update token option.
 		update_option('simsf_access_token', $user_token );
 
@@ -207,7 +209,7 @@ class InstagramData
 
 		// email message.
 		$message = __(
-		'Hi,
+		'Hey there!
 
 		This notification confirms that your Instagram User Access Token Has Been Updated on ###SITENAME###.
 
@@ -215,6 +217,8 @@ class InstagramData
 
 		Refreshed tokens are valid for 60 days from the date at which they are refreshed.
 		The Sim Social Feed plugin will automatically refresh your Access Token before it expires.
+
+		Token was last Updated: ###PREVIOUS###
 
 		This email has been sent to ###ADMIN_EMAIL###.
 
@@ -228,21 +232,34 @@ class InstagramData
 		$message = str_replace( '###SITENAME###', $blog_name, $message );
 		$message = str_replace( '###CREATED###', $token_created, $message );
 		$message = str_replace( '###EXPIRES###', $token_will_expire, $message );
-		$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+		$message = str_replace( '###PREVIOUS###', $previously, $message );
+		//$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+		$message = str_replace( '###ADMIN_EMAIL###', self::notification_email(), $message );
 
-
-		# new token array
+		// new token array
 		$igtoken = array();
 		$igtoken['access_token'] = get_option('simsf_access_token')['access_token'];
 		$igtoken['reset'] = false;
 
-		# set new token value
+		// set new token value
 		update_option('simsf_token', $igtoken );
 
 		// send email.
 		wp_mail( $admin_user, $subject, $message );
 
 		return $user_token;
+	}
+
+	/**
+	 * Notification about auto updates.
+	 *
+	 * @return string .
+	 */
+	public static function notification_email() {
+		if ( get_option( 'simsf_notification_email', false ) ) {
+			return get_option( 'simsf_notification_email' );
+		}
+		get_option( 'admin_email' );
 	}
 
 	/**
@@ -283,8 +300,7 @@ class InstagramData
 	public static function token_created_date() {
 		if ( self::has_refresh() ) {
 			$created_date = get_option( 'simsf_access_token' )['created_at'];
-			$date = date_i18n( get_option( 'date_format' ), $created_date);
-			return $date;
+			return date_i18n( get_option( 'date_format' ), $created_date);
 		}
 		return 'no date was found ! ';
 	}

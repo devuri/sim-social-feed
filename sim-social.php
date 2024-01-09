@@ -1,22 +1,15 @@
 <?php
 /**
- * Sim Social Feed
- *
- * @package   SimSocialFeed
- * @author    Uriel Wilson
- * @copyright 2020 Uriel Wilson
- * @license   GPL-2.0
- * @link      https://urielwilson.com
  *
  * @wordpress-plugin
  * Plugin Name:       Sim Social Feed
- * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
+ * Plugin URI:        https://wpbrisko.com/wordpress-plugins/
  * Description:       Easily Display Social Media Photo Feed for Instagram. The feed will schedule twicedaily updates, you can also update manually with a single click.
- * Version:           2.8.2
+ * Version:           2.9.3
  * Requires at least: 3.4
  * Requires PHP:      5.6
- * Author:            SwitchWebdev.com
- * Author URI:        https://switchwebdev.com
+ * Author:            wpbrisko.com
+ * Author URI:        https://wpbrisko.com
  * Text Domain:       sim-social-feed
  * Domain Path:       languages
  * License:           GPLv2
@@ -28,14 +21,10 @@
      	die;
     }
 
-    /**
-     * Load composer
-     */
+    // Load composer.
     require_once 'vendor/autoload.php';
 
-    /**
-     * Setup some defualts setup activation schedule
-     */
+    // Setup some defualts setup activation schedule.
     register_activation_hook( __FILE__, function() {
 
 	       	/**
@@ -48,9 +37,7 @@
 		        wp_schedule_event( time(), 'twicedaily', 'sim_social_feed_cron' );
 		    }
 
-			/**
-			 * Setup some defaults
-			 */
+			// Setup some defaults.
 			$simsf_token = array();
 			$simsf_token['token'] = null;
 			$simsf_token['reset'] = null;
@@ -61,19 +48,13 @@
 	    }
 	);
 
-    /**
-     * Handle Deactivation
-     */
+    // Handle Deactivation.
     register_deactivation_hook( __FILE__, function() {
 
-		    /**
-		     * Remove the scheduled event
-		     */
+		    // Remove the scheduled event.
 		    wp_clear_scheduled_hook( 'sim_social_feed_cron' );
 
-		    /**
-		     * Setup some defaults
-		     */
+		    // Setup some defaults.
 		    $simsf_token = array();
 		    $simsf_token['token'] = null;
 		    $simsf_token['reset'] = null;
@@ -91,7 +72,5 @@
 	    }
 	);
 
-    /**
-     * Create admin pages
-     */
+    // Create admin pages.
     SimSocialFeed\Admin\SocialFeedAdmin::init();

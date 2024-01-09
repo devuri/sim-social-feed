@@ -1,10 +1,10 @@
 === Sim Social Feed ===
 Contributors: icelayer
-Donate link: https://switchwebdev.com/wordpress-plugins/
+Donate link: https://wpbrisko.com/wordpress-plugins/
 Tags: Instagram, Instagram photos, Instagram feed, Instagram widget, Instagram gallery
 Requires at least: 3.4
 Tested up to: 5.7
-Stable tag: 2.8.2
+Stable tag: 2.9.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
