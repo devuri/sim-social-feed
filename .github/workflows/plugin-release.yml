@@ -1,0 +1,23 @@
+name: Release 🟢
+on:
+  pull_request:
+    types:
+      - closed
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Release 🟢
+        uses: devuri/plugin-release-deploy-action@main
+        with:
+          php-version: '7.4'
+          node-version: '16'
+          plugin-slug: 'sim-site-maintenance' # WordPress.org plugin slug
+          build-dir: './build/trunk/'
+          zip-file: 'sim-site-maintenance.zip'
+          svn-username: ${{ secrets.SVN_USERNAME }}
+          svn-password: ${{ secrets.SVN_PASSWORD }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          dry-run: 'false' # This optional and defaults to 'false'
