@@ -96,9 +96,7 @@ class InstagramData
 	 * @return array
 	 */
 	public static function user_profile() {
-		$user = self::api()->getUserProfile();
-		$user_data = (array) $user;
-		return $user_data;
+		return (array) self::api()->getUserProfile();
 	}
 
 	/**
@@ -211,7 +209,7 @@ class InstagramData
 
 		// email message.
 		$message = __(
-		'Hi,
+		'Hey there!
 
 		This notification confirms that your Instagram User Access Token Has Been Updated on ###SITENAME###.
 
@@ -235,7 +233,8 @@ class InstagramData
 		$message = str_replace( '###CREATED###', $token_created, $message );
 		$message = str_replace( '###EXPIRES###', $token_will_expire, $message );
 		$message = str_replace( '###PREVIOUS###', $previously, $message );
-		$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+		//$message = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $message );
+		$message = str_replace( '###ADMIN_EMAIL###', self::notification_email(), $message );
 
 		// new token array
 		$igtoken = array();
@@ -249,6 +248,18 @@ class InstagramData
 		wp_mail( $admin_user, $subject, $message );
 
 		return $user_token;
+	}
+
+	/**
+	 * Notification about auto updates.
+	 *
+	 * @return string .
+	 */
+	public static function notification_email() {
+		if ( get_option( 'simsf_notification_email', false ) ) {
+			return get_option( 'simsf_notification_email' );
+		}
+		get_option( 'admin_email' );
 	}
 
 	/**
@@ -289,8 +300,7 @@ class InstagramData
 	public static function token_created_date() {
 		if ( self::has_refresh() ) {
 			$created_date = get_option( 'simsf_access_token' )['created_at'];
-			$date = date_i18n( get_option( 'date_format' ), $created_date);
-			return $date;
+			return date_i18n( get_option( 'date_format' ), $created_date);
 		}
 		return 'no date was found ! ';
 	}

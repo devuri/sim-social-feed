@@ -1,18 +1,4 @@
 <?php
-/**
- *  Uninstall stuff.
- *  do some cleanup after user uninstalls the plugin
- *  ---------------------------------------------------------------------------
- *  -remove stuff
- * ----------------------------------------------------------------------------
- *
- * @category   Plugin
- * @copyright  Copyright © 2020 Uriel Wilson.
- * @package    SimSocialFeed
- * @author     Uriel Wilson
- * @link       https://switchwebdev.com
- *  ----------------------------------------------------------------------------
- */
 
 	// deny direct access.
 	if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
@@ -27,6 +13,7 @@
   	delete_option( 'simsf_access_token' );
   	delete_option( 'simsf_user' );
   	delete_option( 'simsf_user_media' );
+  	delete_option( 'simsf_notification_email' );
 
 
   	// finally clear the cache.
